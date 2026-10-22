@@ -1,0 +1,180 @@
+@import "tailwindcss";
+@import "../styles/tokens.css";
+
+/* Boje i fontovi za Tailwind; podrazumevana paleta se ne koristi.
+   Tipografija, radijusi i kriva su definisani direktno u @theme (tokens.css). */
+@theme inline {
+  --color-*: initial;
+  --color-bg: var(--bg);
+  --color-bg-2: var(--bg-2);
+  --color-line: var(--line);
+  --color-line-2: var(--line-2);
+  --color-text: var(--text);
+  --color-muted: var(--muted);
+  --color-dim: var(--dim);
+  --color-accent: var(--accent);
+  --color-on-accent: var(--on-accent);
+  --color-energy: var(--energy);
+  --color-energy-hot: var(--energy-hot);
+  --color-transparent: transparent;
+  --color-current: currentColor;
+
+  --font-display: var(--font-funnel-display), system-ui, sans-serif;
+  --font-sans: var(--font-funnel-sans), system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+
+  --shadow-glow-accent: var(--glow-accent);
+  --shadow-glow-accent-hover: var(--glow-accent-hover);
+  --shadow-glow-energy: var(--glow-energy);
+  --shadow-glow-frame: var(--glow-frame);
+
+  --container-site: var(--container);
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    background: var(--bg);
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-sans);
+    font-size: var(--text-body);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    background: rgba(var(--accent-rgb), 0.85);
+    color: var(--on-accent);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+}
+
+@layer components {
+  .wrap {
+    width: 100%;
+    max-width: var(--container);
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  .display {
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: var(--tracking-display);
+    line-height: 0.98;
+    text-wrap: balance;
+  }
+
+  .mono {
+    font-family: var(--font-mono);
+    font-size: var(--text-mono);
+    letter-spacing: var(--tracking-mono);
+  }
+
+  /* Dugmad (osnova; Specular varijanta dolazi kasnije) */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    height: 44px;
+    padding-inline: 20px;
+    border-radius: var(--radius-pill);
+    font-size: 15px;
+    font-weight: 500;
+    white-space: nowrap;
+    transition:
+      transform var(--dur-fast) var(--ease-out),
+      box-shadow var(--dur-fast) var(--ease-out),
+      background-color var(--dur-fast) var(--ease-out);
+  }
+  .btn:active {
+    transform: scale(0.97);
+  }
+  .btn-primary {
+    background: var(--accent);
+    color: var(--on-accent);
+    box-shadow: var(--glow-accent);
+  }
+  .btn-ghost {
+    border: 1px solid var(--line-2);
+    color: var(--text);
+  }
+  .btn-sm {
+    height: 36px;
+    padding-inline: 14px;
+    font-size: 14px;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .btn-primary:hover {
+      box-shadow: var(--glow-accent-hover);
+    }
+    .btn-ghost:hover {
+      background: rgba(255, 255, 255, 0.04);
+    }
+  }
+
+  /* Oznake (tagovi) */
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    font-family: var(--font-mono);
+    font-size: var(--text-tag);
+    line-height: 1;
+    padding: 6px 10px;
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--line-2);
+    color: var(--muted);
+  }
+  .tag-hot {
+    border-color: rgba(var(--accent-rgb), 0.5);
+    color: var(--accent);
+  }
+
+  /* Oznaka iznad naslova sekcije: crtica u boji struje + mono tekst */
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-mono);
+    font-size: var(--text-mono);
+    letter-spacing: var(--tracking-mono);
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .eyebrow::before {
+    content: "";
+    width: 18px;
+    height: 1px;
+    background: var(--energy);
+  }
+
+  .link {
+    color: var(--muted);
+    transition: color var(--dur-fast) var(--ease-out);
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .link:hover {
+      color: var(--text);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn:active {
+    transform: none;
+  }
+}

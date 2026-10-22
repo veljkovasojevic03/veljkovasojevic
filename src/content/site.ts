@@ -225,3 +225,46 @@ export const footer = {
     backToTop: { sr: "Nazad na vrh ↑", en: "Back to top ↑" },
   },
 } as const;
+
+/** Sidra sekcija: ista na oba jezika, da prebacivanje jezika zadrži mesto. */
+export const sectionIds = {
+  top: "top",
+  main: "main",
+  showreel: "showreel",
+  work: "work",
+  sites: "sites",
+  about: "about",
+  contact: "contact",
+} as const;
+
+export const seo = {
+  /** [?] Predlog: ime kao naslov, hero podnaslov kao opis. Potvrditi. */
+  title: { sr: "Veljko Vasojević", en: "Veljko Vasojević" },
+  description: hero.sub,
+} as const;
+
+/**
+ * UI mikrotekst koji nije u sadrzaj/ (pristupačnost i privremena mesta).
+ * [?] Predlog, potvrditi.
+ */
+export const ui = {
+  skipLink: { sr: "Preskoči na sadržaj", en: "Skip to content" },
+  homeLabel: { sr: "Veljko Vasojević, početna", en: "Veljko Vasojević, home" },
+  mainNav: { sr: "Glavni meni", en: "Main navigation" },
+  openMenu: { sr: "Meni", en: "Menu" },
+  closeMenu: { sr: "Zatvori meni", en: "Close menu" },
+  languageLabel: { sr: "Jezik", en: "Language" },
+  /** Pun naziv jezika za čitač ekrana. */
+  languageNames: {
+    sr: { sr: "Srpski", en: "Serbian" },
+    en: { sr: "Engleski", en: "English" },
+  },
+  showreelLabel: { sr: "Showreel", en: "Showreel" },
+  placeholders: {
+    showreel: { sr: "SHOWREEL · privremeni kadar", en: "SHOWREEL · placeholder" },
+    video: { sr: "video", en: "video" },
+    screenshot: { sr: "snimak ekrana", en: "screenshot" },
+    photo: { sr: "fotografija · 4:5", en: "photo · 4:5" },
+  },
+  externalLink: { sr: "(otvara se u novom prozoru)", en: "(opens in a new tab)" },
+} as const;

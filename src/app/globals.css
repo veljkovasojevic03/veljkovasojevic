@@ -35,6 +35,8 @@
   html {
     -webkit-text-size-adjust: 100%;
     background: var(--bg);
+    /* Sidra ne završavaju ispod fiksnog menija */
+    scroll-padding-top: var(--nav-h);
   }
 
   body {
@@ -160,6 +162,31 @@
     width: 18px;
     height: 1px;
     background: var(--energy);
+  }
+
+  /* Skip link: skriven iznad ekrana dok ne dobije fokus */
+  .skip-link {
+    position: fixed;
+    top: 12px;
+    left: 12px;
+    z-index: 70;
+    transform: translateY(-200%);
+  }
+  .skip-link:focus-visible {
+    transform: translateY(0);
+  }
+
+  /* Privremeno mesto za video, sliku ili snimak ekrana */
+  .placeholder {
+    display: grid;
+    place-items: center;
+    background:
+      repeating-linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.025) 0 14px,
+        transparent 14px 28px
+      ),
+      var(--bg-2);
   }
 
   .link {

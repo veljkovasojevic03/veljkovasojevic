@@ -67,7 +67,7 @@ export default async function DesignPage() {
   const sample = projects[0];
 
   return (
-    <main className="wrap py-16">
+    <main id="main" tabIndex={-1} className="wrap pt-[calc(var(--nav-h)+64px)] pb-16 outline-none">
       <p className="eyebrow">/design · {locale.toUpperCase()}</p>
       <h1 className="display mt-6 text-[clamp(36px,6vw,72px)]">Tokeni</h1>
 

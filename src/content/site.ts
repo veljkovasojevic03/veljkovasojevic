@@ -34,6 +34,8 @@ export const hero = {
   },
   primaryCta: { sr: "Pogledaj radove →", en: "See the work →" },
   copyEmail: { sr: "Kopiraj mejl", en: "Copy email" },
+  /** [?] Potvrda posle kopiranja (iz reference: "KOPIRANO ✓"); potvrditi. */
+  copied: { sr: "Kopirano ✓", en: "Copied ✓" },
 } as const;
 
 /** Rečenica sa strujom: [?] OTVORENO, Veljko piše. null = sekcija se ne renderuje. */

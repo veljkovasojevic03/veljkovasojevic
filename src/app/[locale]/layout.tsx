@@ -33,7 +33,7 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export default async function LocaleLayout({ children }: LayoutProps<"/[locale]">) {
+export default async function LocaleLayout({ children, modal }: LayoutProps<"/[locale]">) {
   const locale = await rootLocale();
   if (!hasLocale(routing.locales, locale)) notFound();
 
@@ -55,6 +55,8 @@ export default async function LocaleLayout({ children }: LayoutProps<"/[locale]"
           <Intro />
           <SiteHeader />
           {children}
+          {/* Popup projekta (presretnuta ruta /radovi/<slug>). */}
+          {modal}
         </NextIntlClientProvider>
         <Analytics />
       </body>

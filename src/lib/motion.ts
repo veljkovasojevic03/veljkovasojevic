@@ -28,6 +28,9 @@ export const motionTransition = {
 
 export const motionStagger = STAGGER_MS / 1000;
 
+/** Opruga za pregled koji pluta uz kursor (blag zaostatak, bez poskakivanja). */
+export const springFloat = { duration: 0.5, bounce: 0.1 } as const;
+
 /** Ime krive za GSAP; registruje se jednom preko registerGsapEase(). */
 export const GSAP_EASE_OUT = "vvOut";
 

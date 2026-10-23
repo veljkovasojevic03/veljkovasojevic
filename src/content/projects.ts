@@ -31,7 +31,7 @@ export type Project = {
   built: Localized<string[]>;
   /** Nazivi tehnologija; prevodi se samo ono što nije vlastito ime. */
   stack: (string | LText)[];
-  /** SeniorGuard se prikazuje u uspravnom okviru telefona. */
+  /** Okvir videa: prozor browsera ili uspravan telefon (za uspravan snimak). */
   frame: "desktop" | "phone";
 };
 
@@ -312,7 +312,10 @@ export const projects: Project[] = [
       "OpenStreetMap",
       { sr: "3D štampa", en: "3D printing" },
     ],
-    frame: "phone",
+    // Definicija predviđa okvir telefona, ali je video položen (16:9, šema
+    // uređaj → baza → aplikacija), pa bi ga uspravan okvir isekao. Vratiti na
+    // "phone" ako stigne uspravan snimak aplikacije.
+    frame: "desktop",
   },
 ];
 

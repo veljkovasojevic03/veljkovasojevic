@@ -268,4 +268,11 @@ export const ui = {
     photo: { sr: "fotografija · 4:5", en: "photo · 4:5" },
   },
   externalLink: { sr: "(otvara se u novom prozoru)", en: "(opens in a new tab)" },
+  /** Popup i stranica projekta (Veljko potvrdio 23. 10. 2026). */
+  project: {
+    close: { sr: "Zatvori", en: "Close" },
+    backToWork: { sr: "← Svi radovi", en: "← All work" },
+    pauseVideo: { sr: "Pauziraj video", en: "Pause video" },
+    playVideo: { sr: "Pusti video", en: "Play video" },
+  },
 } as const;

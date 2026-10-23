@@ -37,7 +37,7 @@
 
 ## Rečenica koja se „puni strujom“ (između hero-a i showreel-a)
 
-**[?] OTVORENO** — Veljko piše sam. Kratka (do ~10 reči), zvuči kao on. Ako ostane prazno, sekcija se izbacuje.
+**Odlučeno (23. 10. 2026):** Svaki detalj je odluka, ne slučajnost.
 
 ---
 

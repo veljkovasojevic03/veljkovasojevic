@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "../styles/tokens.css";
+@import "lenis/dist/lenis.css";
 
 /* Boje i fontovi za Tailwind; podrazumevana paleta se ne koristi.
    Tipografija, radijusi i kriva su definisani direktno u @theme (tokens.css). */
@@ -247,6 +248,48 @@
     opacity: 0;
   }
 
+  /* Showreel: statičan okvir (smanjen pokret, pre hidratacije) */
+  .showreel-stage {
+    padding-block: var(--section-y);
+  }
+  .showreel-frame {
+    position: relative;
+    overflow: hidden;
+    width: min(960px, 100% - var(--gutter) * 2);
+    aspect-ratio: 16 / 9;
+    margin-inline: auto;
+    border: 1px solid var(--line-2);
+    border-radius: var(--radius-lg);
+    background: var(--bg-2);
+    box-shadow: var(--glow-frame);
+  }
+  @media (min-width: 768px) {
+    .showreel-frame {
+      aspect-ratio: 16 / 10;
+    }
+  }
+  /* Showreel: scena (okvir pune veličine, GSAP ga skalira) */
+  .showreel[data-scene] .showreel-frame {
+    width: 100vw;
+    aspect-ratio: 16 / 9;
+    border-radius: 0;
+    transform-origin: center;
+    will-change: transform;
+  }
+  @media (min-width: 768px) {
+    .showreel[data-scene] .showreel-stage {
+      height: 100svh;
+      padding-block: 0;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+    }
+    .showreel[data-scene] .showreel-frame {
+      height: 100svh;
+      aspect-ratio: auto;
+    }
+  }
+
   /* Privremeno mesto za video, sliku ili snimak ekrana */
   .placeholder {
     display: grid;
@@ -275,6 +318,17 @@
   html {
     scroll-behavior: smooth;
   }
+}
+/* Rečenica sa strujom: reči kreću sive, skrol ih pali (ChargedText). */
+@media (prefers-reduced-motion: no-preference) {
+  .charged [data-word] {
+    color: var(--muted);
+  }
+}
+
+/* Lenis sam vodi skrol; izvorni glatki skrol bi mu smetao. */
+html.lenis {
+  scroll-behavior: auto;
 }
 
 @media (prefers-reduced-motion: reduce) {

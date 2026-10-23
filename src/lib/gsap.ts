@@ -6,14 +6,15 @@
  */
 import { gsap } from "gsap";
 import { Flip } from "gsap/Flip";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { registerGsapEase } from "./motion";
 
 let registered = false;
 
 if (typeof window !== "undefined" && !registered) {
-  gsap.registerPlugin(Flip);
+  gsap.registerPlugin(Flip, ScrollTrigger);
   registerGsapEase(gsap);
   registered = true;
 }
 
-export { gsap, Flip };
+export { gsap, Flip, ScrollTrigger };

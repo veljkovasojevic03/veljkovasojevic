@@ -38,10 +38,10 @@ export const hero = {
   copied: { sr: "Kopirano ✓", en: "Copied ✓" },
 } as const;
 
-/** Rečenica sa strujom: [?] OTVORENO, Veljko piše. null = sekcija se ne renderuje. */
+/** Rečenica sa strujom (Veljko, 23. 10. 2026). null = sekcija se ne renderuje. */
 export const chargedSentence: Localized<string | null> = {
-  sr: null,
-  en: null,
+  sr: "Svaki detalj je odluka, ne slučajnost.",
+  en: "Every detail is a decision, not an accident.",
 };
 
 /** Trak (privremen tekst, može se menjati). */

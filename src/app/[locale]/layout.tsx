@@ -10,6 +10,7 @@ import { siteUrl } from "@/content/links";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { Intro } from "@/components/brand/Intro";
 import { introBootScript } from "@/components/brand/introBoot";
+import { SmoothScroll } from "@/components/scroll/SmoothScroll";
 import "../globals.css";
 
 export function generateStaticParams() {
@@ -50,6 +51,7 @@ export default async function LocaleLayout({ children }: LayoutProps<"/[locale]"
           >
             {ui.skipLink[locale]}
           </a>
+          <SmoothScroll />
           <Intro />
           <SiteHeader />
           {children}

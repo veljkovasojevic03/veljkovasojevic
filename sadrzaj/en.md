@@ -15,7 +15,7 @@
 
 ## Charged sentence (between hero and showreel)
 
-[?] Open, follows the Serbian sentence once Veljko writes it. If there is none, the section is removed.
+Every detail is a decision, not an accident.
 
 ## Marquee
 

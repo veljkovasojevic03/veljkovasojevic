@@ -6,9 +6,10 @@ import { links } from "./links";
 import type { LText } from "./types";
 
 export type DemoSite = {
-  slug: "djak" | "pribojska-banja";
+  slug: "djak" | "borivoje";
   name: LText;
-  place: LText | null;
+  /** Drugi deo naslova posle zareza (mesto ili vlasnik). */
+  detail: LText | null;
   badge: LText;
   href: string;
   cta: LText;
@@ -25,17 +26,18 @@ export const demoSites: DemoSite[] = [
   {
     slug: "djak",
     name: { sr: "Đak Food Store", en: "Đak Food Store" },
-    place: { sr: "Čačak", en: "Čačak" },
+    detail: { sr: "Čačak", en: "Čačak" },
     badge: demoBadge,
     href: "https://djak.vercel.app",
     cta: openSite,
   },
   {
-    slug: "pribojska-banja",
-    name: { sr: "Privatni smeštaj", en: "Private accommodation" },
-    place: { sr: "Pribojska Banja", en: "Pribojska Banja" },
-    badge: demoBadge,
-    href: "https://pribojska-banja.com",
+    // Bratov portfolio (umesto Pribojske Banje, koja je lokalni sajt; 23. 10. 2026).
+    slug: "borivoje",
+    name: { sr: "Portfolio", en: "Portfolio" },
+    detail: { sr: "Borivoje Vasojević", en: "Borivoje Vasojević" },
+    badge: { sr: "lični portfolio", en: "personal portfolio" },
+    href: "https://borivojevasojevic.vercel.app",
     cta: openSite,
   },
 ];

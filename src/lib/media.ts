@@ -31,3 +31,8 @@ export function videoSources(name: string): VideoSources {
 export function hasVideo(sources: VideoSources): boolean {
   return Boolean(sources.mp4 || sources.webm);
 }
+
+/** Slika iz public/media (npr. "sites/djak-desktop"); undefined dok je nema. */
+export function imageSource(name: string): string | undefined {
+  return find(name, ["avif", "webp", "jpg", "jpeg", "png"]);
+}

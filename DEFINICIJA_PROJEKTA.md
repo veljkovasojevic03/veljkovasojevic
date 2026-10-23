@@ -39,7 +39,7 @@ Kvalitet je važniji od brzine; nema roka.
 | 3 | **Showreel** | Mali okvir sa showreel videom (~15 s, isečci svih projekata) pri skrolu se širi preko celog ekrana („ulazimo u sliku“), pa prelazi u radove. Zakačena scena (ScrollTrigger pin), na telefonu kraća. |
 | 4 | **Radovi 01–05** | Numerisana lista (vidi 6.1). Redosled: Autoservis Tole · Fanout AI · Relay AI · CineSpire · SeniorGuard. |
 | 5 | **Trak** | Jedan trak pri skrolu: WEB SAJTOVI ✦ WEB APLIKACIJE ✦ AI ALATI ✦ (brzina prati skrol; tekst privremen, može se menjati). |
-| 6 | **Sajtovi za firme** | Dve velike kartice (Đak Food Store, Pribojska Banja) sa snimkom ekrana i „Otvori sajt ↗“, oznaka „samoinicijativni demo“; manja kartica „Webflow radovi“. Bez popupa. |
+| 6 | **Sajtovi za firme** | Dve velike kartice (Đak Food Store sa oznakom „samoinicijativni demo“; Portfolio, Borivoje Vasojević sa oznakom „lični portfolio“) sa snimkom ekrana i „Otvori sajt ↗“; manja kartica „Webflow radovi“. Bez popupa. |
 | 7 | **O meni + Kako radim** | Kartica sa fotografijom koja se okreće + kratka priča; tri koraka „Kako radim“; veštine u dve kolone. (Mesto za opcioni 3D sto.) |
 | 8 | **Kontakt / podnožje** | Poziv, kopiranje mejla, kolone linkova, ogromno ime VASOJEVIĆ sa munjama, donji red. |
 
@@ -121,7 +121,7 @@ Pravilo: Volt se pojavljuje samo tamo gde „teče struja“. Zabranjeno: indigo
 - Ton: profesionalno + tračak ličnosti. **Obraćanje posetiocu: „ti“ svuda** (npr. „Treba ti sajt?“, „Imaš ideju…“).
 - Hero podnaslov i „O meni“ govore **šta Veljko radi**, ne odakle je (v2 teksta).
 - Hero: SR „Pretvaram ideje u gotove, doterane [web aplikacije / sajtove / AI alate].“ · EN „I turn ideas into finished, polished [web apps / websites / AI tools].“
-- Linkovi: mejl `veljkovasojevic03@gmail.com` · GitHub `github.com/veljkovasojevic03` · LinkedIn `linkedin.com/in/veljko-vasojevic` · Webflow `veljkovasojevic.webflow.io` · Fanout `fanout-ai.vercel.app` · Relay `relay-ai-teal.vercel.app` (+ `/demo`) · Đak `djak.vercel.app` · Pribojska Banja `pribojska-banja.com`.
+- Linkovi: mejl `veljkovasojevic03@gmail.com` · GitHub `github.com/veljkovasojevic03` · LinkedIn `linkedin.com/in/veljko-vasojevic` · Webflow `veljkovasojevic.webflow.io` · Fanout `fanout-ai.vercel.app` · Relay `relay-ai-teal.vercel.app` (+ `/demo`) · Đak `djak.vercel.app` · Portfolio Borivoja Vasojevića `borivojevasojevic.vercel.app` (umesto Pribojske Banje, 23. 10. 2026).
 
 ## 8. Tehnika
 

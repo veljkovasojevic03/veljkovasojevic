@@ -64,11 +64,12 @@ export const work = {
   },
 } as const;
 
+/** Uvod: bez „za lokalne firme“ (bratov portfolio nije firma), Veljko 23. 10. 2026. */
 export const sitesSection = {
   title: { sr: "Treba ti sajt?", en: "Need a website?" },
   text: {
-    sr: "Napravio sam nekoliko sajtova za lokalne firme na svoju inicijativu, kao demo, da pokažem kako bi mogli da izgledaju. Nisu naručeni, ali su urađeni kao da jesu.",
-    en: "I built a few websites for local businesses on my own initiative, as demos, to show what they could look like. Nobody ordered them, but they were made as if someone had.",
+    sr: "Napravio sam nekoliko sajtova na svoju inicijativu, kao demo, da pokažem kako bi mogli da izgledaju. Nisu naručeni, ali su urađeni kao da jesu.",
+    en: "I built a few websites on my own initiative, as demos, to show what they could look like. Nobody ordered them, but they were made as if someone had.",
   },
 } as const;
 
@@ -268,6 +269,12 @@ export const ui = {
     photo: { sr: "fotografija · 4:5", en: "photo · 4:5" },
   },
   externalLink: { sr: "(otvara se u novom prozoru)", en: "(opens in a new tab)" },
+  /** Alt tekst snimaka demo sajtova: "<prefix> <ime sajta>, <uređaj>". */
+  siteShot: {
+    prefix: { sr: "Početna strana:", en: "Homepage:" },
+    desktop: { sr: "računar", en: "desktop" },
+    mobile: { sr: "telefon", en: "phone" },
+  },
   /** Popup i stranica projekta (Veljko potvrdio 23. 10. 2026). */
   project: {
     close: { sr: "Zatvori", en: "Close" },

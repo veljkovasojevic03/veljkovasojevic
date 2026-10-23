@@ -60,9 +60,9 @@
 ## Sajtovi za firme (uvod odeljka)
 
 **Naslov:** Treba ti sajt?  (ceo sajt koristi „ti“)
-**Tekst:** Napravio sam nekoliko sajtova za lokalne firme na svoju inicijativu, kao demo, da pokažem kako bi mogli da izgledaju. Nisu naručeni, ali su urađeni kao da jesu.
+**Tekst:** Napravio sam nekoliko sajtova na svoju inicijativu, kao demo, da pokažem kako bi mogli da izgledaju. Nisu naručeni, ali su urađeni kao da jesu.
 - Đak Food Store, Čačak · samoinicijativni demo · djak.vercel.app
-- Privatni smeštaj, Pribojska Banja · samoinicijativni demo · pribojska-banja.com
+- Portfolio, Borivoje Vasojević · lični portfolio · borivojevasojevic.vercel.app (23. 10. 2026: umesto Pribojske Banje, koja je lokalni sajt)
 - Webflow radovi · 5 starijih sajtova u Webflow-u · veljkovasojevic.webflow.io
 
 ---

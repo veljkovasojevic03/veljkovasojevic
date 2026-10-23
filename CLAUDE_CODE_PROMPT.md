@@ -112,8 +112,8 @@ Ako neki skill nije dostupan u sesiji, reci to u izveštaju i nastavi bez njega;
 ## FAZA 6: Trak i sajtovi za firme
 
 1. **Trak:** jedan red, beskonačan, brzina i smer prate skrol (GSAP); `aria-hidden` sa tekstom dostupnim jednom za čitač ekrana. Reduced motion: statičan.
-2. **Snimci ekrana demo sajtova:** Playwright skripta (`scripts/screenshots.ts`) snima `djak.vercel.app` i `pribojska-banja.com` (desktop + telefon) u `public/media/sites/`, optimizovano (WebP/AVIF). Pokreni je i navedi rezultat.
-3. Dve velike kartice (Đak, Pribojska Banja) sa oznakom „samoinicijativni demo“ i „Otvori sajt ↗“ (`target="_blank" rel="noopener"`), manja kartica „Webflow radovi“. Bez popupa.
+2. **Snimci ekrana demo sajtova:** Playwright skripta (`scripts/screenshots.ts`) snima `djak.vercel.app` i `borivojevasojevic.vercel.app` (desktop + telefon) u `public/media/sites/`, optimizovano (WebP/AVIF). Pokreni je i navedi rezultat.
+3. Dve velike kartice (Đak sa oznakom „samoinicijativni demo“, bratov portfolio sa oznakom „lični portfolio“) i „Otvori sajt ↗“ (`target="_blank" rel="noopener"`), manja kartica „Webflow radovi“. Bez popupa.
 
 **Izveštaj + STOP.**
 

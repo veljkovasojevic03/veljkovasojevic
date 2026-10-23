@@ -70,9 +70,7 @@ export function SiteFooter({ locale }: { locale: Locale }) {
         </div>
 
         <div className="mono mt-6 flex flex-wrap justify-between gap-3 border-t border-line pt-5 text-muted">
-          <p>
-            {footer.bottom.copyright[locale]} · {footer.bottom.place[locale]}
-          </p>
+          <p>{footer.bottom.copyright[locale]}</p>
           <a href={`#${sectionIds.top}`} className="link">
             {footer.bottom.backToTop[locale]}
           </a>

@@ -113,7 +113,7 @@ Pravilo: Volt se pojavljuje samo tamo gde „teče struja“. Zabranjeno: indigo
 - Poziv „Imaš ideju ili posao za mene? Hajde da popričamo.“ + mejl sa kopiranjem jednim klikom (+ `mailto`); mejl blago zaštićen od botova.
 - Kolone: Kontakt (Mejl, LinkedIn) · Radovi (GitHub, Webflow radovi) · Jezik. Link „Kod ovog sajta ↗“.
 - **VASOJEVIĆ** u jednom redu, preko cele širine (veličina se računa da stane); munje povremeno (~3–5 s), lukovi od kursora ka slovima, udar na tap.
-- Donji red: © 2026 Veljko Vasojević · Priboj · Nazad na vrh ↑.
+- Donji red: © 2026 Veljko Vasojević · Nazad na vrh ↑. (Priboj izbačen iz hero-a i podnožja, 23. 10. 2026.)
 
 ## 7. Sadržaj i linkovi
 

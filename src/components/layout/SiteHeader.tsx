@@ -61,12 +61,16 @@ export function SiteHeader() {
     <header
       ref={headerRef}
       onFocusCapture={() => setHidden(false)}
-      className="fixed inset-x-0 top-0 z-50 border-b border-line bg-bg/70 backdrop-blur-md transition-transform duration-(--dur-medium) ease-out motion-reduce:transition-none"
-      style={{ transform: isHidden ? "translateY(-100%)" : "translateY(0)" }}
+      className="fixed inset-x-0 top-0 z-50 border-b border-line bg-bg/70 backdrop-blur-md transition-transform ease-out motion-reduce:transition-none"
+      style={{
+        transform: isHidden ? "translateY(-100%)" : "translateY(0)",
+        // Vraćanje je odgovor na skrol nagore pa je brzo; sakrivanje može sporije.
+        transitionDuration: isHidden ? "var(--dur-medium)" : "var(--dur-fast)",
+      }}
     >
       <div className="wrap flex h-(--nav-h) items-center justify-between gap-4">
         <a href={home} aria-label={ui.homeLabel[locale]} className="-m-2 p-2">
-          <VVMark className="block h-auto w-10" />
+          <VVMark data-vv-target className="block h-auto w-10" />
         </a>
 
         <nav aria-label={ui.mainNav[locale]} className="hidden md:block">

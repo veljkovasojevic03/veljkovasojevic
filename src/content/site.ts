@@ -13,8 +13,8 @@ export const nav = {
 
 export const hero = {
   eyebrow: {
-    sr: "VELJKO VASOJEVIĆ · PRIBOJ",
-    en: "VELJKO VASOJEVIĆ · PRIBOJ, SERBIA",
+    sr: "VELJKO VASOJEVIĆ",
+    en: "VELJKO VASOJEVIĆ",
   },
   /** Naslov = prefix + reč koja se menja + suffix. */
   headline: {
@@ -223,7 +223,6 @@ export const footer = {
   giantName: "VASOJEVIĆ",
   bottom: {
     copyright: { sr: "© 2026 Veljko Vasojević", en: "© 2026 Veljko Vasojević" },
-    place: { sr: "Priboj", en: "Priboj, Serbia" },
     backToTop: { sr: "Nazad na vrh ↑", en: "Back to top ↑" },
   },
 } as const;

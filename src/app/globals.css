@@ -204,6 +204,49 @@
     background: radial-gradient(ellipse 80% 60% at 50% 0%, transparent 40%, var(--bg) 100%);
   }
 
+  /* Uvod (VV): vidljiv samo dok je na <html> atribut data-intro */
+  .intro {
+    display: none;
+  }
+  html[data-intro] .intro {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    pointer-events: none;
+    /* Osigurač: ako JS ne stigne, sloj nestaje sam */
+    animation: intro-failsafe 0s linear 4s forwards;
+  }
+  html[data-intro] [data-vv-target] {
+    opacity: 0;
+    animation: intro-reveal 0s linear 4s forwards;
+  }
+  .intro-half {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 50.5%;
+    background: var(--bg);
+    will-change: transform;
+  }
+  .intro-draw {
+    fill: transparent;
+    stroke-width: 1.6;
+    stroke-linejoin: round;
+    stroke-dasharray: 1 1;
+    stroke-dashoffset: 1;
+  }
+  .intro-spark {
+    fill: none;
+    stroke: #fff;
+    stroke-width: 3;
+    stroke-linecap: round;
+    stroke-dasharray: 0.035 0.965;
+    stroke-dashoffset: 0.035;
+    filter: drop-shadow(0 0 4px var(--energy)) drop-shadow(0 0 10px var(--energy));
+    opacity: 0;
+  }
+
   /* Privremeno mesto za video, sliku ili snimak ekrana */
   .placeholder {
     display: grid;
@@ -237,5 +280,16 @@
 @media (prefers-reduced-motion: reduce) {
   .btn:active {
     transform: none;
+  }
+}
+
+@keyframes intro-failsafe {
+  to {
+    visibility: hidden;
+  }
+}
+@keyframes intro-reveal {
+  to {
+    opacity: 1;
   }
 }

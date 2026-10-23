@@ -49,8 +49,9 @@ export function CopyEmailButton({ label, copiedLabel, className }: Props) {
             <span
               key={key}
               aria-hidden={status !== key}
-              className="col-start-1 row-start-1 text-center transition-opacity duration-(--dur-fast) ease-out"
-              style={{ opacity: status === key ? 1 : 0 }}
+              className="col-start-1 row-start-1 text-center transition-[opacity,filter] duration-(--dur-fast) ease-out"
+              // Blagi blur spaja dve oznake dok se pretapaju.
+              style={{ opacity: status === key ? 1 : 0, filter: status === key ? "blur(0px)" : "blur(2px)" }}
             >
               {text}
             </span>

@@ -8,6 +8,8 @@ import { fontVariables } from "@/lib/fonts";
 import { sectionIds, seo, ui } from "@/content/site";
 import { siteUrl } from "@/content/links";
 import { SiteHeader } from "@/components/layout/SiteHeader";
+import { Intro } from "@/components/brand/Intro";
+import { introBootScript } from "@/components/brand/introBoot";
 import "../globals.css";
 
 export function generateStaticParams() {
@@ -35,7 +37,11 @@ export default async function LocaleLayout({ children }: LayoutProps<"/[locale]"
   if (!hasLocale(routing.locales, locale)) notFound();
 
   return (
-    <html lang={htmlLang[locale]} className={`${fontVariables} antialiased`}>
+    // suppressHydrationWarning: skripta uvoda menja atribut na <html> pre hidratacije.
+    <html lang={htmlLang[locale]} className={`${fontVariables} antialiased`} suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: introBootScript }} />
+      </head>
       <body>
         <NextIntlClientProvider>
           <a
@@ -44,6 +50,7 @@ export default async function LocaleLayout({ children }: LayoutProps<"/[locale]"
           >
             {ui.skipLink[locale]}
           </a>
+          <Intro />
           <SiteHeader />
           {children}
         </NextIntlClientProvider>

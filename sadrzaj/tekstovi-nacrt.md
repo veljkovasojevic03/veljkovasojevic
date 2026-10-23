@@ -6,7 +6,7 @@
 
 ## Hero (odlučeno)
 
-- Gornja oznaka: VELJKO VASOJEVIĆ · PRIBOJ
+- Gornja oznaka: VELJKO VASOJEVIĆ (Priboj izbačen 23. 10. 2026)
 - Naslov: **Pretvaram ideje u gotove, doterane [web aplikacije / sajtove / AI alate].**
 - Podnaslov (v2, objašnjava naslov): Od skice i dizajna, preko koda i baze, do objave na internetu. Gotovo znači da radi i na telefonu, a doterano da se vidi svaki detalj.
 - Dugmad: **Pogledaj radove →** · **Kopiraj mejl**
@@ -75,7 +75,7 @@
 - **Link na kod sajta:** „Kod ovog sajta ↗“ (javni repo)
 - **CV:** za sada nema (odluka); može se dodati kasnije kao link u koloni Kontakt.
 - **Ogromno ime:** VASOJEVIĆ
-- **Red na dnu:** © 2026 Veljko Vasojević · Priboj · Nazad na vrh ↑
+- **Red na dnu:** © 2026 Veljko Vasojević · Nazad na vrh ↑ (Priboj izbačen 23. 10. 2026)
 
 ---
 

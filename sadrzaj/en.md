@@ -8,7 +8,7 @@
 
 ## Hero
 
-- Eyebrow: VELJKO VASOJEVIĆ · PRIBOJ, SERBIA
+- Eyebrow: VELJKO VASOJEVIĆ
 - Headline: **I turn ideas into finished, polished [web apps / websites / AI tools].**
 - Subline: From sketch and design, through code and database, to launch. Finished means it works on your phone too; polished means every detail shows.
 - Buttons: **See the work →** · **Copy email**
@@ -181,7 +181,7 @@ The whole system, on my own: the idea, choosing the platform and components, the
 - **Columns:** Contact (Email, LinkedIn ↗) · Work (GitHub ↗, Webflow work ↗) · Language (Srpski)
 - **Site source:** "Source code of this site ↗"
 - **Giant name:** VASOJEVIĆ
-- **Bottom row:** © 2026 Veljko Vasojević · Priboj, Serbia · Back to top ↑
+- **Bottom row:** © 2026 Veljko Vasojević · Back to top ↑
 
 ## Navigation
 

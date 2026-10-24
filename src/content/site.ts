@@ -210,17 +210,13 @@ export const footer = {
   columns: {
     contact: { sr: "Kontakt", en: "Contact" },
     work: { sr: "Radovi", en: "Work" },
-    language: { sr: "Jezik", en: "Language" },
   },
   linkLabels: {
     email: { sr: "Mejl", en: "Email" },
     linkedin: { sr: "LinkedIn ↗", en: "LinkedIn ↗" },
     github: { sr: "GitHub ↗", en: "GitHub ↗" },
     webflow: { sr: "Webflow radovi ↗", en: "Webflow work ↗" },
-    /** Link ka drugom jeziku. */
-    otherLanguage: { sr: "English", en: "Srpski" },
   },
-  siteSource: { sr: "Kod ovog sajta ↗", en: "Source code of this site ↗" },
   giantName: "VASOJEVIĆ",
   bottom: {
     copyright: { sr: "© 2026 Veljko Vasojević", en: "© 2026 Veljko Vasojević" },

@@ -303,6 +303,48 @@
       var(--bg-2);
   }
 
+  /* Podnožje: VASOJEVIĆ preko cele širine (FooterName računa tačnu veličinu;
+     cqi je približna vrednost pre JS-a, da nema skoka rasporeda). */
+  .giant-wrap {
+    position: relative;
+    container-type: inline-size;
+    touch-action: manipulation;
+  }
+  .giant-bolts {
+    position: absolute;
+    left: -2%;
+    top: -14%;
+    width: 104%;
+    height: 128%;
+    pointer-events: none;
+  }
+  .giant {
+    display: inline-block;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 16.4cqi;
+    letter-spacing: var(--tracking-display);
+    line-height: 0.84;
+    text-transform: uppercase;
+    white-space: nowrap;
+    user-select: none;
+    color: var(--bg-2);
+    -webkit-text-stroke: 1px rgba(var(--energy-rgb), 0.22);
+    /* Tih sjaj (jedini efekat uz smanjen pokret). */
+    text-shadow: 0 0 22px rgba(var(--energy-rgb), 0.1);
+    transition:
+      color 500ms var(--ease-out),
+      text-shadow 600ms var(--ease-out),
+      -webkit-text-stroke-color 500ms var(--ease-out);
+  }
+  /* Slova zasvetle pri udaru: pale se odmah, gase polako. */
+  .giant[data-lit] {
+    color: color-mix(in srgb, var(--bg-2), white 6%);
+    -webkit-text-stroke-color: rgba(var(--energy-rgb), 0.8);
+    text-shadow: var(--glow-energy);
+    transition-duration: 60ms;
+  }
+
   .link {
     color: var(--muted);
     transition: color var(--dur-fast) var(--ease-out);

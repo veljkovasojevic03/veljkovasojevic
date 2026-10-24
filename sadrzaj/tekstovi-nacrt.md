@@ -71,8 +71,8 @@
 
 - **Poziv:** Imaš ideju ili posao za mene? Hajde da popričamo.
 - **Mejl:** veljkovasojevic03@gmail.com + „Kopiraj“
-- **Kolone:** Kontakt (Mejl, LinkedIn ↗ linkedin.com/in/veljko-vasojevic) · Radovi (GitHub ↗ github.com/veljkovasojevic03, Webflow radovi ↗) · Jezik (English)
-- **Link na kod sajta:** „Kod ovog sajta ↗“ (javni repo)
+- **Kolone:** Kontakt (Mejl, LinkedIn ↗ linkedin.com/in/veljko-vasojevic) · Radovi (GitHub ↗ github.com/veljkovasojevic03, Webflow radovi ↗)
+- (Kolona „Jezik“ i link „Kod ovog sajta ↗“ izbačeni 24. 10. 2026; jezik je u meniju.)
 - **CV:** za sada nema (odluka); može se dodati kasnije kao link u koloni Kontakt.
 - **Ogromno ime:** VASOJEVIĆ
 - **Red na dnu:** © 2026 Veljko Vasojević · Nazad na vrh ↑ (Priboj izbačen 23. 10. 2026)

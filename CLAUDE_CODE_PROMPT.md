@@ -128,7 +128,7 @@ Ako neki skill nije dostupan u sesiji, reci to u izveštaju i nastavi bez njega;
 
 ## FAZA 8: Podnožje i munje
 
-1. Poziv, mejl sa kopiranjem jednim klikom + `mailto` (mejl sastavljen u klijentu, ne čitljiv botovima u HTML-u), kolone linkova, „Kod ovog sajta ↗“, donji red sa „Nazad na vrh ↑“.
+1. Poziv, mejl sa kopiranjem jednim klikom + `mailto` (mejl sastavljen u klijentu, ne čitljiv botovima u HTML-u), kolone linkova (bez „Jezik“ i „Kod ovog sajta ↗“, izbačeni 24. 10. 2026), donji red sa „Nazad na vrh ↑“.
 2. **VASOJEVIĆ** u jednom redu, veličina se računa da tačno stane u širinu (i pri promeni veličine prozora i fonta).
 3. **Munje** (canvas 2D, logika iz reference): povremeni udari (~3–5 s, samo kad je vidljivo i tab aktivan), lukovi od kursora ka slovima pri pomeranju miša, udar na tap; slova svetle pri udaru. Pauza van ekrana. Reduced motion: samo statičan tih sjaj.
 

@@ -7,9 +7,6 @@ import { routing, type Locale } from "@/i18n/routing";
 import { ui } from "@/content/site";
 
 type Props = {
-  /** "pill" = SR/EN prekidač u meniju; "link" = jedan link ka drugom jeziku. */
-  variant?: "pill" | "link";
-  linkLabel?: string;
   className?: string;
 };
 
@@ -23,7 +20,8 @@ function currentSectionHash(): string {
   return current && window.scrollY > 0 ? `#${current}` : "";
 }
 
-export function LanguageSwitch({ variant = "pill", linkLabel, className }: Props) {
+/** SR/EN prekidač u meniju. */
+export function LanguageSwitch({ className }: Props) {
   const locale = useLocale() as Locale;
   const pathname = usePathname();
   const params = useParams();
@@ -40,15 +38,6 @@ export function LanguageSwitch({ variant = "pill", linkLabel, className }: Props
     const hash = currentSectionHash();
     if (hash) event.currentTarget.href = event.currentTarget.href.split("#")[0] + hash;
   };
-
-  if (variant === "link") {
-    const target = routing.locales.find((l) => l !== locale) ?? routing.defaultLocale;
-    return (
-      <a href={hrefFor(target)} hrefLang={target} lang={target} onClick={onClick} className={className}>
-        {linkLabel}
-      </a>
-    );
-  }
 
   return (
     <div

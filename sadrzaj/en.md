@@ -178,8 +178,8 @@ The whole system, on my own: the idea, choosing the platform and components, the
 
 - **Call to action:** Got an idea or a job for me? Let's talk.
 - **Email:** veljkovasojevic03@gmail.com + "Copy"
-- **Columns:** Contact (Email, LinkedIn ↗) · Work (GitHub ↗, Webflow work ↗) · Language (Srpski)
-- **Site source:** "Source code of this site ↗"
+- **Columns:** Contact (Email, LinkedIn ↗) · Work (GitHub ↗, Webflow work ↗)
+- (Language column and "Source code of this site ↗" removed on 2026-10-24; language is in the menu.)
 - **Giant name:** VASOJEVIĆ
 - **Bottom row:** © 2026 Veljko Vasojević · Back to top ↑
 

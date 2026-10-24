@@ -59,66 +59,69 @@ export function Intro() {
     const glow = (blur: number, alpha: number) =>
       `drop-shadow(0 0 ${blur}px rgba(${styles.getPropertyValue("--energy-rgb").trim()}, ${alpha}))`;
 
-    const tl = gsap.timeline({ onComplete: finish });
+    // Sve u gsap.context: čišćenje vraća inline stilove, pa ponovno pokretanje
+    // efekta (React StrictMode u razvoju) kreće od čistog stanja.
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline({ onComplete: finish });
 
-    // 1) Iscrtavanje kontura; iskra ima istu krivu kao linija, pa vodi njen vrh.
-    q<SVGPathElement>("[data-draw]").forEach((path, i) => {
-      tl.fromTo(
-        path,
-        { strokeDashoffset: 1 },
-        // autoRound: false — putanja ima dužinu 1, pa GSAP-ovo zaokruživanje na px brisalo bi animaciju.
-        { strokeDashoffset: 0, duration: T.draw, ease: DRAW_EASE, autoRound: false },
-        i * T.drawLag,
-      );
-    });
-    q<SVGPathElement>("[data-spark]").forEach((path, i) => {
-      tl.fromTo(
-        path,
-        { strokeDashoffset: 0.035, opacity: 1 },
-        { strokeDashoffset: -0.965, duration: T.draw, ease: DRAW_EASE, autoRound: false },
-        i * T.drawLag,
-      ).set(path, { opacity: 0 }, i * T.drawLag + T.draw);
-    });
+      // 1) Iscrtavanje kontura; iskra ima istu krivu kao linija, pa vodi njen vrh.
+      q<SVGPathElement>("[data-draw]").forEach((path, i) => {
+        tl.fromTo(
+          path,
+          { strokeDashoffset: 1 },
+          // autoRound: false — putanja ima dužinu 1, pa GSAP-ovo zaokruživanje na px brisalo bi animaciju.
+          { strokeDashoffset: 0, duration: T.draw, ease: DRAW_EASE, autoRound: false },
+          i * T.drawLag,
+        );
+      });
+      q<SVGPathElement>("[data-spark]").forEach((path, i) => {
+        tl.fromTo(
+          path,
+          { strokeDashoffset: 0.035, opacity: 1 },
+          { strokeDashoffset: -0.965, duration: T.draw, ease: DRAW_EASE, autoRound: false },
+          i * T.drawLag,
+        ).set(path, { opacity: 0 }, i * T.drawLag + T.draw);
+      });
 
-    // 2) Punjenje: prvo V tiho, drugo V bljesne strujom i zadrži blag sjaj.
-    tl.to(q("[data-gap]"), { opacity: 1, duration: T.gap, ease: FILL_EASE }, T.fillAt)
-      .fromTo(
-        q("[data-v1]"),
-        { fill: "rgba(237,237,240,0)" },
-        { fill: text, duration: T.fillV1, ease: FILL_EASE },
-        T.fillAt,
-      )
-      .fromTo(
-        q("[data-v2]"),
-        { fill: "rgba(0,0,0,0)", filter: glow(0, 0) },
-        {
-          keyframes: [
-            { fill: energyHot, filter: glow(16, 1), duration: T.fillV2 * 0.3 },
-            { fill: energy, filter: glow(4, 1), duration: T.fillV2 * 0.7 },
-          ],
-          ease: FILL_EASE,
-        },
-        T.fillAt,
-      );
+      // 2) Punjenje: prvo V tiho, drugo V bljesne strujom i zadrži blag sjaj.
+      tl.to(q("[data-gap]"), { opacity: 1, duration: T.gap, ease: FILL_EASE }, T.fillAt)
+        .fromTo(
+          q("[data-v1]"),
+          { fill: "rgba(237,237,240,0)" },
+          { fill: text, duration: T.fillV1, ease: FILL_EASE },
+          T.fillAt,
+        )
+        .fromTo(
+          q("[data-v2]"),
+          { fill: "rgba(0,0,0,0)", filter: glow(0, 0) },
+          {
+            keyframes: [
+              { fill: energyHot, filter: glow(16, 1), duration: T.fillV2 * 0.3 },
+              { fill: energy, filter: glow(4, 1), duration: T.fillV2 * 0.7 },
+            ],
+            ease: FILL_EASE,
+          },
+          T.fillAt,
+        );
 
-    // 3) Znak sleće na logo u meniju, zavesa se razdvaja.
-    if (target) {
-      tl.add(
-        Flip.fit(q("[data-mark]")[0], target, {
-          scale: true,
-          duration: T.fly,
-          ease: MOVE_EASE,
-        }) as gsap.core.Tween,
-        T.flyAt,
-      );
-    }
-    tl.to(q("[data-half='l']"), { xPercent: -101, duration: T.curtain, ease: MOVE_EASE }, T.flyAt + T.curtainLag)
-      .to(q("[data-half='r']"), { xPercent: 101, duration: T.curtain, ease: MOVE_EASE }, T.flyAt + T.curtainLag);
+      // 3) Znak sleće na logo u meniju, zavesa se razdvaja.
+      if (target) {
+        tl.add(
+          Flip.fit(q("[data-mark]")[0], target, {
+            scale: true,
+            duration: T.fly,
+            ease: MOVE_EASE,
+          }) as gsap.core.Tween,
+          T.flyAt,
+        );
+      }
+      tl.to(q("[data-half='l']"), { xPercent: -101, duration: T.curtain, ease: MOVE_EASE }, T.flyAt + T.curtainLag)
+        .to(q("[data-half='r']"), { xPercent: 101, duration: T.curtain, ease: MOVE_EASE }, T.flyAt + T.curtainLag);
+    }, root);
 
-    return () => {
-      tl.kill();
-      finish();
-    };
+    // Bez finish() ovde: skidanje atributa bi drugom pokretanju efekta javilo da
+    // uvoda nema. Uvod završava kraj animacije, a CSS osigurač posle 4 s.
+    return () => ctx.revert();
   }, []);
 
   return (

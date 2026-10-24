@@ -11,6 +11,7 @@ export function Showreel({ locale }: { locale: Locale }) {
       label={ui.showreelLabel[locale]}
       placeholder={ui.placeholders.showreel[locale]}
       video={videoSources("showreel")}
+      labels={{ pause: ui.project.pauseVideo[locale], play: ui.project.playVideo[locale] }}
     />
   );
 }

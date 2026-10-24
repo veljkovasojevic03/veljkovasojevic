@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { email } from "@/content/links";
 import { copyText } from "@/lib/clipboard";
+import { announce } from "@/lib/announce";
 
 /** Koliko dugo potvrda ostaje vidljiva. */
 const CONFIRM_MS = 1800;
@@ -29,6 +30,7 @@ export function CopyEmailButton({ label, copiedLabel, className }: Props) {
   const onClick = async () => {
     const ok = await copyText(address);
     setStatus(ok ? "copied" : "failed");
+    if (ok) announce(copiedLabel);
     window.clearTimeout(timer.current);
     if (ok) timer.current = window.setTimeout(() => setStatus("idle"), CONFIRM_MS);
   };
@@ -58,9 +60,6 @@ export function CopyEmailButton({ label, copiedLabel, className }: Props) {
           ))}
         </span>
       )}
-      <span className="sr-only" aria-live="polite">
-        {status === "copied" ? copiedLabel : ""}
-      </span>
     </button>
   );
 }

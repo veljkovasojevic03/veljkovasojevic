@@ -31,8 +31,26 @@ export const motionStagger = STAGGER_MS / 1000;
 /** Opruga za pregled koji pluta uz kursor (blag zaostatak, bez poskakivanja). */
 export const springFloat = { duration: 0.5, bounce: 0.1 } as const;
 
-/** Opruga za okretanje kartice (redak, nameran trenutak; trajanje = SLOW). */
-export const springFlip = { type: "spring", duration: DURATION_MS.slow / 1000, bounce: 0.15 } as const;
+/**
+ * Opruga kao CSS kriva (linear()), za prelaze bez JS biblioteke: prigušena
+ * oscilacija koja se smiri za `durationMs`; bounce 0.1–0.3 = blago dotezanje.
+ */
+export function springEasing(durationMs: number, bounce: number, samples = 48): string {
+  const zeta = 1 - bounce;
+  // Frekvencija tako da je ostatak na kraju ispod 0,5 %.
+  const omega = Math.log(200) / (zeta * (durationMs / 1000));
+  const omegaD = omega * Math.sqrt(1 - zeta * zeta);
+  const points = Array.from({ length: samples + 1 }, (_, i) => {
+    const t = ((i / samples) * durationMs) / 1000;
+    const decay = Math.exp(-zeta * omega * t);
+    const value = 1 - decay * (Math.cos(omegaD * t) + ((zeta * omega) / omegaD) * Math.sin(omegaD * t));
+    return i === samples ? "1" : value.toFixed(4);
+  });
+  return `linear(${points.join(", ")})`;
+}
+
+/** Okretanje kartice: redak, nameran trenutak (trajanje = SLOW, blago dotezanje). */
+export const FLIP_EASING = springEasing(DURATION_MS.slow, 0.15);
 
 /** Ime krive za GSAP; registruje se jednom preko registerGsapEase(). */
 export const GSAP_EASE_OUT = "vvOut";

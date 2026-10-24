@@ -239,6 +239,8 @@ export const seo = {
   /** [?] Predlog: ime kao naslov, hero podnaslov kao opis. Potvrditi. */
   title: { sr: "Veljko Vasojević", en: "Veljko Vasojević" },
   description: hero.sub,
+  /** JSON-LD Person: fakultet (zvaničan naziv, isti na oba jezika). */
+  alumniOf: "Fakultet tehničkih nauka u Čačku",
 } as const;
 
 /**

@@ -66,12 +66,12 @@ export function Sites({ locale }: { locale: Locale }) {
                   )}
                 </div>
 
-                <div className="relative grid flex-1 grid-cols-[minmax(0,1fr)_auto] items-end gap-4 border-t border-line bg-bg-2 p-5 sm:p-6">
+                <div className="relative grid flex-1 items-end gap-4 border-t border-line bg-bg-2 p-5 sm:grid-cols-[minmax(0,1fr)_auto] sm:p-6">
                   <div className="min-w-0">
                     <h3 className="display text-[clamp(22px,2.4vw,30px)] leading-[1.1]">{title}</h3>
                     <span className="tag mt-3">{site.badge[locale]}</span>
                   </div>
-                  <a href={site.href} target="_blank" rel="noopener" className="btn btn-ghost">
+                  <a href={site.href} target="_blank" rel="noopener" className="btn btn-ghost justify-self-start">
                     {site.cta[locale]}
                     <span className="sr-only"> {ui.externalLink[locale]}</span>
                   </a>

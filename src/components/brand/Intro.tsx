@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { Flip, gsap } from "@/lib/gsap";
+import { useGsap } from "@/lib/gsap";
 import { cubicBezier } from "@/lib/motion";
 import { INTRO_ATTR, INTRO_KEY } from "./introBoot";
 import { V1, V2, VV_GAP, VV_VIEWBOX_ATTR } from "./vvGeometry";
@@ -37,11 +37,13 @@ const FILL_EASE = cubicBezier(0, 0, 0.58, 1);
  */
 export function Intro() {
   const rootRef = useRef<HTMLDivElement>(null);
+  const kit = useGsap();
 
   useEffect(() => {
     const html = document.documentElement;
     const root = rootRef.current;
-    if (!root || !html.hasAttribute(INTRO_ATTR)) return;
+    if (!kit || !root || !html.hasAttribute(INTRO_ATTR)) return;
+    const { gsap, Flip } = kit;
 
     try {
       sessionStorage.setItem(INTRO_KEY, "1");
@@ -122,7 +124,7 @@ export function Intro() {
     // Bez finish() ovde: skidanje atributa bi drugom pokretanju efekta javilo da
     // uvoda nema. Uvod završava kraj animacije, a CSS osigurač posle 4 s.
     return () => ctx.revert();
-  }, []);
+  }, [kit]);
 
   return (
     <div ref={rootRef} className="intro" aria-hidden="true">

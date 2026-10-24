@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { gsap } from "@/lib/gsap";
 import { useReducedMotion } from "@/lib/useMediaQuery";
 import { useScrollBoost } from "@/lib/useScrollBoost";
 
@@ -34,8 +33,10 @@ export function ScrollMarquee({ items, separator, className }: Props) {
     const track = trackRef.current;
     if (!track || !width.current) return;
     const percentPerSec = ((BASE_SPEED * speed) / width.current) * 100;
-    x.current = gsap.utils.wrap(-50, 0, x.current - (direction * percentPerSec * deltaMs) / 1000);
-    gsap.set(track, { xPercent: x.current });
+    // Omotavanje na (-50, 0]: kad pređe pola, vraća se za tačno jednu polovinu.
+    const next = x.current - (direction * percentPerSec * deltaMs) / 1000;
+    x.current = ((next % 50) - 50) % 50;
+    track.style.transform = `translate3d(${x.current}%, 0, 0)`;
   });
 
   useEffect(() => {
@@ -47,7 +48,7 @@ export function ScrollMarquee({ items, separator, className }: Props) {
     observer.observe(track);
     return () => {
       observer.disconnect();
-      gsap.set(track, { clearProps: "transform" });
+      track.style.transform = "";
     };
   }, [reduce]);
 

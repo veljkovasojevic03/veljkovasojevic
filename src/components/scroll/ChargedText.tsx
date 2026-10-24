@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { gsap } from "@/lib/gsap";
+import { useGsap } from "@/lib/gsap";
 import { useReducedMotion } from "@/lib/useMediaQuery";
 
 /** Koliko reči istovremeno "nosi struju" na granici (širina talasa). */
@@ -15,11 +15,13 @@ const WAVE_WORDS = 1.5;
 export function ChargedText({ text, className }: { text: string; className?: string }) {
   const reduce = useReducedMotion();
   const ref = useRef<HTMLParagraphElement>(null);
+  const kit = useGsap();
   const words = text.split(" ");
 
   useEffect(() => {
     const el = ref.current;
-    if (!el || reduce) return;
+    if (!kit || !el || reduce) return;
+    const { gsap } = kit;
 
     const styles = getComputedStyle(document.documentElement);
     const muted = styles.getPropertyValue("--muted").trim();
@@ -49,7 +51,7 @@ export function ChargedText({ text, className }: { text: string; className?: str
     }, el);
 
     return () => ctx.revert();
-  }, [reduce, text]);
+  }, [kit, reduce, text]);
 
   return (
     <p ref={ref} className={className}>

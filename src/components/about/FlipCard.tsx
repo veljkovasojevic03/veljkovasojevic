@@ -1,8 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { motion } from "motion/react";
-import { DURATION_MS, EASE_OUT_CSS, springFlip } from "@/lib/motion";
+import { DURATION_MS, EASE_OUT_CSS, FLIP_EASING } from "@/lib/motion";
 import { useReducedMotion } from "@/lib/useMediaQuery";
 
 type Props = {
@@ -46,11 +45,13 @@ export function FlipCard({ front, back, label, className }: Props) {
 
   return (
     <div className={`relative perspective-[1400px] ${className ?? ""}`}>
-      <motion.div
+      {/* CSS prelaz sa krivom opruge: prekidiv, bez JS biblioteke za animaciju. */}
+      <div
         className="relative size-full transform-3d"
-        initial={false}
-        animate={{ transform: !reduce && flipped ? "rotateY(180deg)" : "rotateY(0deg)" }}
-        transition={springFlip}
+        style={{
+          transform: !reduce && flipped ? "rotateY(180deg)" : "rotateY(0deg)",
+          transition: reduce ? "none" : `transform ${DURATION_MS.slow}ms ${FLIP_EASING}`,
+        }}
       >
         <div
           className={`${face} bg-bg-2 transition-opacity duration-(--dur-medium) ease-out ${reduce && flipped ? "opacity-0" : ""}`}
@@ -66,7 +67,7 @@ export function FlipCard({ front, back, label, className }: Props) {
           {back}
           <Spark ref={(el) => void (sparks.current[1] = el)} />
         </div>
-      </motion.div>
+      </div>
 
       <button
         type="button"

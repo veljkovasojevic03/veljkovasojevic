@@ -1,6 +1,7 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState, type PointerEvent } from "react";
+import dynamic from "next/dynamic";
 import { Link } from "@/i18n/navigation";
 import type { ProjectSlug } from "@/content/projects";
 import type { VideoSources } from "@/lib/media";
@@ -8,7 +9,7 @@ import { useMediaQuery, useReducedMotion } from "@/lib/useMediaQuery";
 import { rememberTrigger, TRIGGER_ATTR } from "@/lib/returnFocus";
 import { Placeholder } from "@/components/ui/BrowserFrame";
 import { Poster, VideoFrame, type FrameKind } from "./VideoFrame";
-import { FloatingPreview, useFloatingPreview } from "./FloatingPreview";
+import type { PreviewState } from "./FloatingPreview";
 import { useCenteredItem } from "./useCenteredItem";
 
 export type WorkItem = {
@@ -23,6 +24,13 @@ export type WorkItem = {
 
 type Labels = { details: string; preview: string; placeholder: string };
 
+// Poseban paket (Motion + opruge), samo kad zaista treba: računar sa mišem.
+const FloatingPreview = dynamic(() => import("./FloatingPreview").then((m) => m.FloatingPreview), {
+  ssr: false,
+});
+
+const HIDDEN: PreviewState = { slug: null, visible: false, anchor: null, at: null };
+
 /**
  * Računar (lg + pointer: fine): hover i fokus prikazuju video pregled uz kursor.
  * Telefon i tablet: kartice; svira samo video kartice na sredini ekrana.
@@ -35,18 +43,36 @@ export function WorkRows({ items, labels }: { items: WorkItem[]; labels: Labels 
   const floating = wide && fine;
 
   const listRef = useRef<HTMLOListElement>(null);
-  const preview = useFloatingPreview({ enabled: floating, reduce });
+  const [preview, setPreview] = useState<PreviewState>(HIDDEN);
   const centered = useCenteredItem(listRef, !wide);
+
+  const show = (slug: ProjectSlug, e: PointerEvent<HTMLElement>) => {
+    if (!floating || e.pointerType !== "mouse") return;
+    // Uz smanjen pokret pregled ne prati kursor, nego stoji iznad reda.
+    const anchor = reduce ? e.currentTarget : null;
+    setPreview({ slug, visible: true, anchor, at: { x: e.clientX, y: e.clientY } });
+  };
+  const showAt = (slug: ProjectSlug, el: HTMLElement) => {
+    // Samo fokus tastaturom; klik mišem već ima pregled uz kursor.
+    if (!floating || !el.matches(":focus-visible")) return;
+    setPreview({ slug, visible: true, anchor: el, at: null });
+  };
+  const hide = () => setPreview((p) => (p.visible ? { ...p, visible: false, anchor: null } : p));
+  // Miš posle tastature: pregled se vraća uz kursor.
+  const release = (e: PointerEvent<HTMLElement>) => {
+    if (reduce || e.pointerType !== "mouse" || !preview.anchor) return;
+    setPreview((p) => ({ ...p, anchor: null, at: { x: e.clientX, y: e.clientY } }));
+  };
 
   return (
     <>
       <ol
         ref={listRef}
         className="mt-10 grid gap-4 lg:gap-0 lg:border-t lg:border-line"
-        onPointerMove={preview.onPointerMove}
-        onPointerLeave={preview.hide}
+        onPointerMove={release}
+        onPointerLeave={hide}
         onBlur={(e) => {
-          if (!listRef.current?.contains(e.relatedTarget as Node | null)) preview.hide();
+          if (!listRef.current?.contains(e.relatedTarget as Node | null)) hide();
         }}
       >
         {items.map((item) => {
@@ -64,8 +90,8 @@ export function WorkRows({ items, labels }: { items: WorkItem[]; labels: Labels 
                 data-lit={lit ? "" : undefined}
                 {...{ [TRIGGER_ATTR]: item.slug }}
                 onClick={() => rememberTrigger(item.slug)}
-                onPointerEnter={(e) => preview.show(item.slug, e)}
-                onFocus={(e) => preview.showAt(item.slug, e.currentTarget)}
+                onPointerEnter={(e) => show(item.slug, e)}
+                onFocus={(e) => showAt(item.slug, e.currentTarget)}
                 className="group grid grid-cols-[32px_1fr] gap-x-3 gap-y-3 rounded-lg p-4 sm:p-5 lg:grid-cols-[56px_minmax(0,1fr)_minmax(0,1.15fr)_auto_auto] lg:items-center lg:gap-x-8 lg:rounded-none lg:px-1 lg:py-7"
               >
                 <div className="order-first col-span-2 mb-2 lg:hidden">
@@ -81,7 +107,7 @@ export function WorkRows({ items, labels }: { items: WorkItem[]; labels: Labels 
                 <span className="mono pt-2 text-muted transition-colors duration-(--dur-fast) ease-out group-hover:text-energy group-focus-visible:text-energy group-data-lit:text-energy lg:pt-0">
                   {item.number}
                 </span>
-                <h3 className="display text-h3 leading-[1.1]">{item.name}</h3>
+                <h3 translate="no" className="display text-h3 leading-[1.1]">{item.name}</h3>
 
                 <div className="col-start-2 lg:col-start-auto">
                   <p className="text-small text-muted">{item.line}</p>
@@ -114,7 +140,16 @@ export function WorkRows({ items, labels }: { items: WorkItem[]; labels: Labels 
         })}
       </ol>
 
-      {floating && <FloatingPreview items={items} label={labels.preview} placeholder={labels.placeholder} state={preview} />}
+      {floating && (
+        <FloatingPreview
+          items={items}
+          label={labels.preview}
+          placeholder={labels.placeholder}
+          state={preview}
+          reduce={reduce}
+          listRef={listRef}
+        />
+      )}
     </>
   );
 }

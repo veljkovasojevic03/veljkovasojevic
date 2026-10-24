@@ -25,7 +25,7 @@ export function SiteFooter({ locale }: { locale: Locale }) {
               {footer.cta[locale]}
             </h2>
             <div className="mt-8 flex flex-wrap items-baseline gap-x-4 gap-y-2 border-b border-line-2 pb-3">
-              <EmailLink className="display text-[clamp(18px,2.2vw,26px)] font-semibold tracking-[-0.02em]" />
+              <EmailLink className="display text-[clamp(18px,2.2vw,26px)] tracking-[-0.02em]" />
               <CopyEmailButton
                 label={footer.copy[locale]}
                 copiedLabel={hero.copied[locale]}

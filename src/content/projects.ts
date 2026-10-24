@@ -126,7 +126,7 @@ export const projects: Project[] = [
         "Pristupačnost se proverava automatski (axe) na svakom ekranu, na oba jezika.",
       ],
       en: [
-        "The demo works with no sign-up and no cost: \"Sample mode\" streams pre-written content through the same path as the real AI, clearly labelled. There are 30 such samples (3 topics × 2 languages × 5 formats).",
+        "The demo works with no sign-up and no cost: “Sample mode” streams pre-written content through the same path as the real AI, clearly labelled. There are 30 such samples (3 topics × 2 languages × 5 formats).",
         "Quotas (how many generations each plan gets) are checked in the database in a single transaction, so two requests at the same moment can't exceed the limit.",
         "Five pieces stream in parallel; updates are batched and drawn once per frame so the interface stays smooth.",
         "Scheduled posts go to email and Discord through n8n, with signed requests in both directions.",
@@ -241,7 +241,7 @@ export const projects: Project[] = [
     },
     built: {
       sr: [
-        "Admin ukuca naziv filma ili serije, a podaci (opis, godina, poster...) se sami popune sa TMDB-a; admin ih po potrebi koriguje pre čuvanja.",
+        "Admin ukuca naziv filma ili serije, a podaci (opis, godina, poster…) se sami popune sa TMDB-a; admin ih po potrebi koriguje pre čuvanja.",
         "Recenzije sa ocenama i lajkovima; prosečna ocena filma ili serije računa se ponovo posle svake nove, izmenjene ili obrisane recenzije.",
         "Praćenje drugih korisnika, lista za gledanje, nedavno gledano i lične liste filmova i serija.",
         "Pretraga i filtriranje po žanru, sa paginacijom.",
@@ -299,7 +299,7 @@ export const projects: Project[] = [
         "Choosing the platform: an Arduino Nano has no network and not enough memory for an encrypted connection to Firebase, and a BLE sensor (CC2650) needs a phone in the middle. The ESP32 has built-in Wi-Fi, so the device sends data on its own.",
         "Falls are detected on the device itself (total acceleration above 2.5 g), because that decision is time-critical; the cloud only carries data to the app.",
         "The firmware recovers by itself: it reconnects when Wi-Fi drops and restarts on a schedule.",
-        "An Android app in Kotlin with five tabs (status, map, vitals, alarms, family and settings). Data updates live, and a background service shows every new alarm full screen, with \"I've seen it, going to check\" and \"Call emergency services (194)\".",
+        "An Android app in Kotlin with five tabs (status, map, vitals, alarms, family and settings). Data updates live, and a background service shows every new alarm full screen, with “I’ve seen it, going to check” and “Call emergency services (194)”.",
         "Four alarm types: SOS, fall, missed morning check-in and long inactivity. The map uses OpenStreetMap, and the status can be exported as a PDF report.",
       ],
     },

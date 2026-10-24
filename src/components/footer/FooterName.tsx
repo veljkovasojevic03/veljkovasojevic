@@ -176,7 +176,7 @@ export function FooterName({ name }: { name: string }) {
     // Ukras: ime je već u © redu i u naslovu stranice.
     <div ref={wrapRef} aria-hidden="true" className="giant-wrap">
       <canvas ref={canvasRef} className="giant-bolts" />
-      <p ref={textRef} className="giant">
+      <p ref={textRef} translate="no" className="giant">
         {name}
       </p>
     </div>

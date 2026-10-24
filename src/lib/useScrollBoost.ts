@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, type RefObject } from "react";
-import { gsap, ScrollTrigger } from "@/lib/gsap";
+import { useGsap } from "@/lib/gsap";
 
 /** Najveće ubrzanje od skrola i koliko brzo se gasi (po frejmu od 60 Hz). */
 const MAX_BOOST = 6;
@@ -25,9 +25,12 @@ export function useScrollBoost(
     frame.current = onFrame;
   });
 
+  const kit = useGsap();
+
   useEffect(() => {
     const target = targetRef.current;
-    if (!enabled || !target) return;
+    if (!kit || !enabled || !target) return;
+    const { gsap, ScrollTrigger } = kit;
 
     let direction: 1 | -1 = 1;
     let boost = 0;
@@ -55,5 +58,5 @@ export function useScrollBoost(
       gsap.ticker.remove(tick);
       trigger.kill();
     };
-  }, [targetRef, enabled]);
+  }, [kit, targetRef, enabled]);
 }

@@ -50,6 +50,14 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
+  /* Bez kašnjenja dvostrukog dodira i bez sivog bljeska na dodir (fokus i
+     stanja su već vidljivi). */
+  a,
+  button {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+
   ::selection {
     background: rgba(var(--accent-rgb), 0.85);
     color: var(--on-accent);
@@ -320,7 +328,7 @@
   }
   .giant {
     display: inline-block;
-    font-family: var(--font-display);
+    font-family: var(--font-funnel-display-heavy), var(--font-display);
     font-weight: 800;
     font-size: 16.4cqi;
     letter-spacing: var(--tracking-display);
@@ -332,6 +340,8 @@
     -webkit-text-stroke: 1px rgba(var(--energy-rgb), 0.22);
     /* Tih sjaj (jedini efekat uz smanjen pokret). */
     text-shadow: 0 0 22px rgba(var(--energy-rgb), 0.1);
+    /* Sjaj se menja direktno na tekstu: sloj preko (samo opacity) bio bi jeftiniji,
+       ali se njegova ivica pri Windows skaliranju (125 %) ne poklapa i vidi se stepenasto. */
     transition:
       color 500ms var(--ease-out),
       text-shadow 600ms var(--ease-out),

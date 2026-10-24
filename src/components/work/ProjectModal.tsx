@@ -120,10 +120,21 @@ export function ProjectModal({ closeLabel, children }: Props) {
 }
 
 /** Naslov popupa; Radix ga vezuje za aria-labelledby. */
-export function ModalTitle({ className, children }: { className?: string; children: React.ReactNode }) {
+export function ModalTitle({
+  className,
+  translate,
+  children,
+}: {
+  className?: string;
+  /** "no" za vlastita imena (ime projekta). */
+  translate?: "yes" | "no";
+  children: React.ReactNode;
+}) {
   return (
     <Dialog.Title asChild>
-      <h2 className={className}>{children}</h2>
+      <h2 className={className} translate={translate}>
+        {children}
+      </h2>
     </Dialog.Title>
   );
 }

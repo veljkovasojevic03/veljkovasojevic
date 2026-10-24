@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { notFound } from "next/navigation";
 import { locale as rootLocale } from "next/root-params";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
@@ -11,11 +11,18 @@ import { SiteHeader } from "@/components/layout/SiteHeader";
 import { Intro } from "@/components/brand/Intro";
 import { introBootScript } from "@/components/brand/introBoot";
 import { SmoothScroll } from "@/components/scroll/SmoothScroll";
+import { LiveRegion } from "@/components/ui/LiveRegion";
 import "../globals.css";
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
+
+/** Samo tamna tema: boja trake browsera = --bg. */
+export const viewport: Viewport = {
+  themeColor: "#07070a",
+  colorScheme: "dark",
+};
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await rootLocale();
@@ -58,6 +65,7 @@ export default async function LocaleLayout({ children, modal }: LayoutProps<"/[l
           {children}
           {/* Popup projekta (presretnuta ruta /radovi/<slug>). */}
           {modal}
+          <LiveRegion />
         </NextIntlClientProvider>
         <Analytics />
       </body>

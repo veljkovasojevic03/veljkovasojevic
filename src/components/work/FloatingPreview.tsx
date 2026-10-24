@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useRef, useState, type PointerEvent } from "react";
-import { motion, useSpring, useTransform, type MotionValue } from "motion/react";
+import { useEffect, useRef, type RefObject } from "react";
+import { motion, useSpring, useTransform } from "motion/react";
 import type { ProjectSlug } from "@/content/projects";
 import { motionTransition, springFloat } from "@/lib/motion";
 import { VideoFrame } from "./VideoFrame";
@@ -14,109 +14,93 @@ const H = Math.round((W * 9) / 16) + 34;
 const GAP = 24;
 const EDGE = 12;
 
-type Options = { enabled: boolean; reduce: boolean };
-
-export type PreviewState = ReturnType<typeof useFloatingPreview>;
-
-/**
- * Stanje pregleda koji pluta uz kursor. Mišem: prati kursor oprugom, uvek sa one
- * strane kursora gde ima mesta. Tastaturom (i uz smanjen pokret): stoji iznad reda.
- */
-export function useFloatingPreview({ enabled, reduce }: Options) {
-  const [active, setActive] = useState<ProjectSlug | null>(null);
-  const [visible, setVisible] = useState(false);
-  const x = useSpring(0, springFloat);
-  const y = useSpring(0, springFloat);
-  const shown = useRef(false);
-  const anchor = useRef<HTMLElement | null>(null);
-
-  const place = (tx: number, ty: number) => {
-    // Prvo pojavljivanje i smanjen pokret: bez preletanja preko ekrana.
-    if (!shown.current || reduce) {
-      x.jump(tx);
-      y.jump(ty);
-    } else {
-      x.set(tx);
-      y.set(ty);
-    }
-  };
-
-  const placeAtCursor = (cx: number, cy: number) => {
-    const tx = cx > window.innerWidth / 2 ? cx - W - GAP : cx + GAP;
-    const ty = Math.min(Math.max(cy - H / 2, EDGE), window.innerHeight - H - EDGE);
-    place(tx, ty);
-  };
-
-  const placeAtRow = (el: HTMLElement) => {
-    const rect = el.getBoundingClientRect();
-    const above = rect.top - H - EDGE;
-    place(rect.right - W, above >= EDGE ? above : rect.bottom + EDGE);
-  };
-
-  const reveal = (slug: ProjectSlug) => {
-    shown.current = true;
-    setActive(slug);
-    setVisible(true);
-  };
-
-  // Pregled vezan za red (tastatura) prati red pri skrolu.
-  useEffect(() => {
-    if (!visible) return;
-    const onScroll = () => {
-      if (anchor.current) placeAtRow(anchor.current);
-    };
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  });
-
-  return {
-    active,
-    visible: enabled && visible,
-    x,
-    y,
-    reduce,
-    show(slug: ProjectSlug, e: PointerEvent<HTMLElement>) {
-      if (!enabled || e.pointerType !== "mouse") return;
-      if (reduce) {
-        anchor.current = e.currentTarget;
-        placeAtRow(e.currentTarget);
-      } else {
-        anchor.current = null;
-        placeAtCursor(e.clientX, e.clientY);
-      }
-      reveal(slug);
-    },
-    showAt(slug: ProjectSlug, el: HTMLElement) {
-      // Samo fokus tastaturom; klik mišem već ima pregled uz kursor.
-      if (!enabled || !el.matches(":focus-visible")) return;
-      anchor.current = el;
-      placeAtRow(el);
-      reveal(slug);
-    },
-    onPointerMove(e: PointerEvent<HTMLElement>) {
-      if (!enabled || reduce || e.pointerType !== "mouse" || !shown.current) return;
-      anchor.current = null;
-      placeAtCursor(e.clientX, e.clientY);
-    },
-    hide() {
-      shown.current = false;
-      anchor.current = null;
-      setVisible(false);
-    },
-  };
-}
+/** Stanje koje drži lista; ova komponenta samo crta i pomera pregled. */
+export type PreviewState = {
+  slug: ProjectSlug | null;
+  visible: boolean;
+  /** Red uz koji pregled stoji (tastatura, smanjen pokret); null = prati kursor. */
+  anchor: HTMLElement | null;
+  /** Gde je kursor bio kad se pregled pojavio. */
+  at: { x: number; y: number } | null;
+};
 
 type Props = {
   items: WorkItem[];
   label: string;
   placeholder: string;
   state: PreviewState;
+  reduce: boolean;
+  listRef: RefObject<HTMLElement | null>;
 };
 
-/** Video pregled iznad liste (ukras; isti sadržaj je u redu i u popupu). */
-export function FloatingPreview({ items, label, placeholder, state }: Props) {
-  const { active, visible, x, y, reduce } = state;
-  const transform = useTranslate(x, y);
+function cursorTarget(cx: number, cy: number) {
+  // Uvek sa one strane kursora gde ima mesta.
+  const x = cx > window.innerWidth / 2 ? cx - W - GAP : cx + GAP;
+  const y = Math.min(Math.max(cy - H / 2, EDGE), window.innerHeight - H - EDGE);
+  return { x, y };
+}
+
+function rowTarget(el: HTMLElement) {
+  const rect = el.getBoundingClientRect();
+  const above = rect.top - H - EDGE;
+  return { x: rect.right - W, y: above >= EDGE ? above : rect.bottom + EDGE };
+}
+
+/**
+ * Video pregled koji pluta uz kursor (oprugom) ili stoji iznad reda (tastatura,
+ * smanjen pokret). Ukras: isti sadržaj je u redu i u popupu. Učitava se posebno,
+ * samo na računaru sa mišem, pa telefon ne preuzima Motion.
+ */
+export function FloatingPreview({ items, label, placeholder, state, reduce, listRef }: Props) {
+  const x = useSpring(0, springFloat);
+  const y = useSpring(0, springFloat);
+  // Pun transform string (hardverski ubrzan), ne x/y prečice.
+  const transform = useTransform(() => `translate3d(${x.get()}px, ${y.get()}px, 0)`);
+  const shown = useRef(false);
+  const { slug, visible, anchor, at } = state;
+
+  const place = (target: { x: number; y: number }, instant: boolean) => {
+    if (instant) {
+      x.jump(target.x);
+      y.jump(target.y);
+    } else {
+      x.set(target.x);
+      y.set(target.y);
+    }
+  };
+
+  // Pojavljivanje i promena reda: prvi put bez preletanja preko ekrana.
+  useEffect(() => {
+    if (!visible) {
+      shown.current = false;
+      return;
+    }
+    const target = anchor ? rowTarget(anchor) : at ? cursorTarget(at.x, at.y) : null;
+    if (target) place(target, !shown.current || reduce);
+    shown.current = true;
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- place koristi stabilne opruge
+  }, [visible, anchor, at, slug, reduce]);
+
+  // Uz kursor: prati pomeranje miša preko liste.
+  useEffect(() => {
+    const list = listRef.current;
+    if (!visible || anchor || reduce || !list) return;
+    const onMove = (e: PointerEvent) => {
+      if (e.pointerType === "mouse") place(cursorTarget(e.clientX, e.clientY), false);
+    };
+    list.addEventListener("pointermove", onMove);
+    return () => list.removeEventListener("pointermove", onMove);
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- place koristi stabilne opruge
+  }, [visible, anchor, reduce, listRef]);
+
+  // Uz red: prati red pri skrolu.
+  useEffect(() => {
+    if (!visible || !anchor) return;
+    const onScroll = () => place(rowTarget(anchor), true);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- place koristi stabilne opruge
+  }, [visible, anchor]);
 
   return (
     <motion.div
@@ -134,7 +118,7 @@ export function FloatingPreview({ items, label, placeholder, state }: Props) {
         transition={motionTransition.fast}
       >
         {items.map((item) => {
-          const on = item.slug === active;
+          const on = item.slug === slug;
           return (
             <div
               key={item.slug}
@@ -155,9 +139,4 @@ export function FloatingPreview({ items, label, placeholder, state }: Props) {
       </motion.div>
     </motion.div>
   );
-}
-
-/** Pun transform string (hardverski ubrzan), ne x/y prečice. */
-function useTranslate(x: MotionValue<number>, y: MotionValue<number>) {
-  return useTransform(() => `translate3d(${x.get()}px, ${y.get()}px, 0)`);
 }

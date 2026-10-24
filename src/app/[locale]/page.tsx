@@ -14,6 +14,7 @@ import { Sites } from "@/components/sections/Sites";
 import { About } from "@/components/sections/About";
 import { HowIWork } from "@/components/sections/HowIWork";
 import { SiteFooter } from "@/components/layout/SiteFooter";
+import { PersonJsonLd } from "@/components/seo/PersonJsonLd";
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await rootLocale();
@@ -38,6 +39,7 @@ export default async function HomePage() {
 
   return (
     <>
+      <PersonJsonLd locale={locale} />
       <main id={sectionIds.main} tabIndex={-1} className="outline-none">
         <Hero locale={locale} />
         <ChargedSentence locale={locale} />

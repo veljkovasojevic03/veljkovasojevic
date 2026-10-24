@@ -1,10 +1,11 @@
 "use client";
 
-import { useEffect, useRef, useSyncExternalStore } from "react";
-import { gsap, ScrollTrigger } from "@/lib/gsap";
+import { useEffect, useRef, useState, useSyncExternalStore } from "react";
+import { useGsap } from "@/lib/gsap";
 import { useReducedMotion } from "@/lib/useMediaQuery";
 import type { VideoSources } from "@/lib/media";
 import { Placeholder } from "@/components/ui/BrowserFrame";
+import { Poster } from "@/components/work/VideoFrame";
 
 /** Najveća širina malog okvira na računaru (kao u fazi 1). */
 const START_MAX_WIDTH = 960;
@@ -22,6 +23,8 @@ type Props = {
   label: string;
   placeholder: string;
   video: VideoSources;
+  /** Dugme za pauzu (video svira sam duže od 5 s, WCAG 2.2.2). */
+  labels: { pause: string; play: string };
 };
 
 /**
@@ -29,10 +32,12 @@ type Props = {
  * (pin + scrub), pa stranica nastavlja u radove. Na telefonu je scena kraća
  * i okvir se širi do ivica ekrana. Uz smanjen pokret: statičan okvir.
  */
-export function ShowreelScene({ id, label, placeholder, video }: Props) {
+export function ShowreelScene({ id, label, placeholder, video, labels }: Props) {
   const reduce = useReducedMotion();
   const mounted = useMounted();
-  const scene = mounted && !reduce;
+  const kit = useGsap();
+  // Scena tek kad GSAP stigne; do tada statičan okvir (kao uz smanjen pokret).
+  const scene = mounted && !reduce && kit !== null;
   const stageRef = useRef<HTMLDivElement>(null);
   const frameRef = useRef<HTMLDivElement>(null);
   const barRef = useRef<HTMLDivElement>(null);
@@ -42,7 +47,8 @@ export function ShowreelScene({ id, label, placeholder, video }: Props) {
     const stage = stageRef.current;
     const frame = frameRef.current;
     const bar = barRef.current;
-    if (!scene || !stage || !frame || !bar) return;
+    if (!kit || !scene || !stage || !frame || !bar) return;
+    const { gsap, ScrollTrigger } = kit;
 
     const gutter = () =>
       parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--gutter")) || 16;
@@ -75,19 +81,23 @@ export function ShowreelScene({ id, label, placeholder, video }: Props) {
 
     ScrollTrigger.refresh();
     return () => ctx.revert();
-  }, [scene]);
+  }, [kit, scene]);
+
+  // null = posetilac još nije birao; tada odlučuje smanjen pokret.
+  const [choice, setChoice] = useState<boolean | null>(null);
+  const wantPlay = choice ?? !reduce;
 
   // Video svira samo dok je na ekranu.
   useEffect(() => {
     const el = videoRef.current;
     if (!el) return;
     const observer = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting && !reduce) void el.play().catch(() => undefined);
+      if (entry.isIntersecting && wantPlay) void el.play().catch(() => undefined);
       else el.pause();
     });
     observer.observe(el);
     return () => observer.disconnect();
-  }, [reduce]);
+  }, [wantPlay]);
 
   const hasVideo = Boolean(video.mp4 || video.webm);
 
@@ -96,7 +106,9 @@ export function ShowreelScene({ id, label, placeholder, video }: Props) {
       <div ref={stageRef} className="showreel-stage">
         <div ref={frameRef} className="showreel-frame">
           <div className="relative size-full">
-            {hasVideo ? (
+            {/* Poster kao lenja slika ispod videa (vidi VideoFrame). */}
+            {video.poster && <Poster src={video.poster} sizes="100vw" />}
+            {hasVideo && (
               <video
                 ref={videoRef}
                 className="absolute inset-0 size-full object-cover"
@@ -104,14 +116,21 @@ export function ShowreelScene({ id, label, placeholder, video }: Props) {
                 loop
                 playsInline
                 preload="none"
-                poster={video.poster}
                 aria-hidden="true"
               >
                 {video.webm && <source src={video.webm} type="video/webm" />}
                 {video.mp4 && <source src={video.mp4} type="video/mp4" />}
               </video>
-            ) : (
-              <Placeholder label={placeholder} />
+            )}
+            {!hasVideo && !video.poster && <Placeholder label={placeholder} />}
+            {hasVideo && (
+              <button
+                type="button"
+                onClick={() => setChoice(!wantPlay)}
+                className="btn btn-ghost btn-sm absolute right-3 bottom-3 z-10 bg-bg/80 backdrop-blur-sm"
+              >
+                {wantPlay ? labels.pause : labels.play}
+              </button>
             )}
           </div>
           <div

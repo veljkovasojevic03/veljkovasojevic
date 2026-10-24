@@ -59,28 +59,28 @@ function FrameMedia({
     else el.pause();
   }, [playing]);
 
-  if (!hasVideo) {
-    return sources.poster ? (
-      <Poster src={sources.poster} sizes={sizes} />
-    ) : (
-      <Placeholder label={placeholder} />
-    );
-  }
+  if (!sources.poster && !hasVideo) return <Placeholder label={placeholder} />;
 
+  // Poster je slika ispod videa, ne `poster` atribut: atribut se preuzima odmah,
+  // a slika tek kad se približi ekranu (i u širini koja treba).
   return (
-    <video
-      ref={videoRef}
-      className="absolute inset-0 size-full object-cover"
-      muted
-      loop
-      playsInline
-      preload="none"
-      poster={sources.poster}
-      aria-hidden="true"
-    >
-      {sources.webm && <source src={sources.webm} type="video/webm" />}
-      {sources.mp4 && <source src={sources.mp4} type="video/mp4" />}
-    </video>
+    <>
+      {sources.poster && <Poster src={sources.poster} sizes={sizes} />}
+      {hasVideo && (
+        <video
+          ref={videoRef}
+          className="absolute inset-0 size-full object-cover"
+          muted
+          loop
+          playsInline
+          preload="none"
+          aria-hidden="true"
+        >
+          {sources.webm && <source src={sources.webm} type="video/webm" />}
+          {sources.mp4 && <source src={sources.mp4} type="video/mp4" />}
+        </video>
+      )}
+    </>
   );
 }
 

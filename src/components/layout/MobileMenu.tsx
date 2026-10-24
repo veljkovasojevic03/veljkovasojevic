@@ -63,7 +63,7 @@ export function MobileMenu({ items, open, onOpenChange, locale }: Props) {
         <Dialog.Content
           onCloseAutoFocus={onCloseAutoFocus}
           aria-describedby={undefined}
-          className="fixed inset-0 z-61 flex flex-col bg-bg md:hidden"
+          className="fixed inset-0 z-61 flex flex-col overscroll-contain bg-bg md:hidden"
         >
           <Dialog.Title className="sr-only">{ui.openMenu[locale]}</Dialog.Title>
           <div className="wrap flex h-(--nav-h) items-center justify-between">

@@ -28,9 +28,9 @@ export function ProjectDetail({ project, locale, sources, variant }: Props) {
       <header>
         <p className="mono text-muted">{project.number}</p>
         {modal ? (
-          <ModalTitle className={titleClass}>{project.name}</ModalTitle>
+          <ModalTitle className={titleClass} translate="no">{project.name}</ModalTitle>
         ) : (
-          <h1 className={titleClass}>{project.name}</h1>
+          <h1 translate="no" className={titleClass}>{project.name}</h1>
         )}
         <p className="mt-4 max-w-[60ch] text-lede text-muted">{project.line[locale]}</p>
 

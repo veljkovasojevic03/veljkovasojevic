@@ -2,9 +2,21 @@ import { Funnel_Display, Funnel_Sans, Geist_Mono } from "next/font/google";
 
 export const funnelDisplay = Funnel_Display({
   subsets: ["latin", "latin-ext"],
-  weight: ["600", "700", "800"],
+  weight: ["700"],
   variable: "--font-funnel-display",
   display: "swap",
+});
+
+/**
+ * Isti font, težina 800: samo VASOJEVIĆ u podnožju. Posebna instanca bez
+ * preload-a, da ne usporava prvi ekran (stiže kad zatreba).
+ */
+export const funnelDisplayHeavy = Funnel_Display({
+  subsets: ["latin", "latin-ext"],
+  weight: ["800"],
+  variable: "--font-funnel-display-heavy",
+  display: "swap",
+  preload: false,
 });
 
 export const funnelSans = Funnel_Sans({
@@ -15,13 +27,14 @@ export const funnelSans = Funnel_Sans({
 
 export const geistMono = Geist_Mono({
   subsets: ["latin", "latin-ext"],
-  weight: ["400", "500"],
+  weight: ["400"],
   variable: "--font-geist-mono",
   display: "swap",
 });
 
 export const fontVariables = [
   funnelDisplay.variable,
+  funnelDisplayHeavy.variable,
   funnelSans.variable,
   geistMono.variable,
 ].join(" ");

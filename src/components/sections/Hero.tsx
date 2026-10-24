@@ -2,7 +2,6 @@ import type { Locale } from "@/i18n/routing";
 import { hero, sectionIds } from "@/content/site";
 import { FlipWord } from "@/components/hero/FlipWord";
 import { HeroBackground } from "@/components/hero/HeroBackground";
-import { CopyEmailButton } from "@/components/ui/CopyEmailButton";
 
 export function Hero({ locale }: { locale: Locale }) {
   const { prefix, words, suffix } = hero.headline;
@@ -35,11 +34,9 @@ export function Hero({ locale }: { locale: Locale }) {
           <a href={`#${sectionIds.work}`} className="btn btn-primary">
             {hero.primaryCta[locale]}
           </a>
-          <CopyEmailButton
-            label={hero.copyEmail[locale]}
-            copiedLabel={hero.copied[locale]}
-            className="btn btn-ghost"
-          />
+          <a href={`#${sectionIds.contact}`} className="btn btn-ghost">
+            {hero.contactCta[locale]}
+          </a>
         </div>
       </div>
     </section>

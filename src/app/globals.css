@@ -213,6 +213,28 @@
     background: radial-gradient(ellipse 80% 60% at 50% 0%, transparent 40%, var(--bg) 100%);
   }
 
+  /* Impuls kroz liniju između sekcija: rep se gasi ulevo, glava je usijana */
+  .section-wire-beam {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(var(--energy-rgb), 0.35) 55%,
+        var(--energy) 92%,
+        var(--energy-hot) 100%
+      )
+      center / 100% 1px no-repeat;
+  }
+  /* Sjaj oko glave (zamućen jednom; pomera se samo transform) */
+  .section-wire-beam::after {
+    content: "";
+    position: absolute;
+    inset: 3px 0;
+    background: linear-gradient(90deg, transparent 45%, rgba(var(--energy-rgb), 0.55) 100%);
+    filter: blur(4px);
+  }
+
   /* Uvod (VV): vidljiv samo dok je na <html> atribut data-intro */
   .intro {
     display: none;

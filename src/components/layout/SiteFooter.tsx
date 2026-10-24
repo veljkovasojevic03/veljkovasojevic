@@ -1,9 +1,10 @@
 import type { Locale } from "@/i18n/routing";
-import { footer, hero, sectionIds, ui } from "@/content/site";
+import { footer, sectionIds, ui } from "@/content/site";
 import { links } from "@/content/links";
 import { EmailLink } from "@/components/ui/EmailLink";
 import { CopyEmailButton } from "@/components/ui/CopyEmailButton";
 import { FooterName } from "@/components/footer/FooterName";
+import { HeroBackground } from "@/components/hero/HeroBackground";
 
 type FooterLink = { label: string; href: string };
 
@@ -16,30 +17,32 @@ export function SiteFooter({ locale }: { locale: Locale }) {
     <footer
       id={sectionIds.contact}
       aria-labelledby="contact-title"
-      className="overflow-hidden pt-(--section-y) pb-6"
+      className="relative isolate overflow-hidden pt-(--section-y) pb-6"
     >
+      {/* Ista mreža i struja kao u hero-u: stranica počinje i završava se istim prizorom. */}
+      <HeroBackground />
       <div className="wrap">
         <div className="grid gap-12 lg:grid-cols-[1.2fr_1fr] lg:items-end">
           <div>
             <h2 id="contact-title" className="display max-w-[16ch] text-h2">
               {footer.cta[locale]}
             </h2>
-            <div className="mt-8 flex flex-wrap items-baseline gap-x-4 gap-y-2 border-b border-line-2 pb-3">
+            <div className="mt-8 border-b border-line-2 pb-3">
               <EmailLink className="display text-[clamp(18px,2.2vw,26px)] tracking-[-0.02em]" />
+            </div>
+            <div className="mt-6 flex flex-wrap gap-3">
               <CopyEmailButton
-                label={footer.copy[locale]}
-                copiedLabel={hero.copied[locale]}
-                className="mono uppercase text-muted transition-colors duration-(--dur-fast) ease-out hover:text-text"
+                label={footer.copyEmail[locale]}
+                copiedLabel={footer.copied[locale]}
+                className="btn btn-primary"
               />
+              <EmailLink className="btn btn-ghost">{footer.sendEmail[locale]}</EmailLink>
             </div>
           </div>
 
           <div>
             <div className="grid grid-cols-2 gap-x-6 gap-y-8">
               <FooterColumn title={columns.contact[locale]}>
-                <li>
-                  <EmailLink className="link">{linkLabels.email[locale]}</EmailLink>
-                </li>
                 <ExternalItem link={external(linkLabels.linkedin[locale], links.linkedin)} locale={locale} />
               </FooterColumn>
               <FooterColumn title={columns.work[locale]}>

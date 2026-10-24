@@ -33,9 +33,8 @@ export const hero = {
     en: "From sketch and design, through code and database, to launch. Finished means it works on your phone too; polished means every detail shows.",
   },
   primaryCta: { sr: "Pogledaj radove →", en: "See the work →" },
-  copyEmail: { sr: "Kopiraj mejl", en: "Copy email" },
-  /** [?] Potvrda posle kopiranja (iz reference: "KOPIRANO ✓"); potvrditi. */
-  copied: { sr: "Kopirano ✓", en: "Copied ✓" },
+  /** Spušta do kontakta u podnožju (Veljko, 24. 10. 2026; umesto „Kopiraj mejl“). */
+  contactCta: { sr: "Javi se", en: "Get in touch" },
 } as const;
 
 /** Rečenica sa strujom (Veljko, 23. 10. 2026). null = sekcija se ne renderuje. */
@@ -206,13 +205,16 @@ export const footer = {
     sr: "Imaš ideju ili posao za mene? Hajde da popričamo.",
     en: "Got an idea or a job for me? Let's talk.",
   },
-  copy: { sr: "Kopiraj", en: "Copy" },
+  copyEmail: { sr: "Kopiraj mejl", en: "Copy email" },
+  /** Potvrda posle kopiranja (Veljko potvrdio 24. 10. 2026). */
+  copied: { sr: "Kopirano ✓", en: "Copied ✓" },
+  /** Otvara mejl (mailto). Veljko, 24. 10. 2026. */
+  sendEmail: { sr: "Pošalji mejl", en: "Send email" },
   columns: {
     contact: { sr: "Kontakt", en: "Contact" },
     work: { sr: "Radovi", en: "Work" },
   },
   linkLabels: {
-    email: { sr: "Mejl", en: "Email" },
     linkedin: { sr: "LinkedIn ↗", en: "LinkedIn ↗" },
     github: { sr: "GitHub ↗", en: "GitHub ↗" },
     webflow: { sr: "Webflow radovi ↗", en: "Webflow work ↗" },
@@ -236,7 +238,7 @@ export const sectionIds = {
 } as const;
 
 export const seo = {
-  /** [?] Predlog: ime kao naslov, hero podnaslov kao opis. Potvrditi. */
+  /** Ime kao naslov, hero podnaslov kao opis (potvrđeno 24. 10. 2026). */
   title: { sr: "Veljko Vasojević", en: "Veljko Vasojević" },
   description: hero.sub,
   /** JSON-LD Person: fakultet (zvaničan naziv, isti na oba jezika). */
@@ -245,7 +247,7 @@ export const seo = {
 
 /**
  * UI mikrotekst koji nije u sadrzaj/ (pristupačnost i privremena mesta).
- * [?] Predlog, potvrditi.
+ * Potvrđeno 24. 10. 2026.
  */
 export const ui = {
   skipLink: { sr: "Preskoči na sadržaj", en: "Skip to content" },

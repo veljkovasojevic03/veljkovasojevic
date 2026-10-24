@@ -122,7 +122,7 @@ export default async function DesignPage() {
             {hero.primaryCta[locale]}
           </button>
           <button type="button" className="btn btn-ghost">
-            {hero.copyEmail[locale]}
+            {hero.contactCta[locale]}
           </button>
           <button type="button" className="btn btn-primary btn-sm">
             {nav.cta[locale]}

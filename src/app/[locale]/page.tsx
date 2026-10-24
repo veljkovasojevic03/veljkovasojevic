@@ -14,6 +14,7 @@ import { Sites } from "@/components/sections/Sites";
 import { About } from "@/components/sections/About";
 import { HowIWork } from "@/components/sections/HowIWork";
 import { SiteFooter } from "@/components/layout/SiteFooter";
+import { SectionWire } from "@/components/scroll/SectionWire";
 import { PersonJsonLd } from "@/components/seo/PersonJsonLd";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -41,14 +42,22 @@ export default async function HomePage() {
     <>
       <PersonJsonLd locale={locale} />
       <main id={sectionIds.main} tabIndex={-1} className="outline-none">
+        {/* SectionWire stoji ispod svake sekcije sa donjom linijom; smer se smenjuje. */}
         <Hero locale={locale} />
+        <SectionWire from="left" />
         <ChargedSentence locale={locale} />
+        <SectionWire from="right" />
         <Showreel locale={locale} />
         <WorkList locale={locale} />
+        <SectionWire from="left" />
         <Marquee locale={locale} />
+        <SectionWire from="right" />
         <Sites locale={locale} />
+        <SectionWire from="left" />
         <About locale={locale} />
+        <SectionWire from="right" />
         <HowIWork locale={locale} />
+        <SectionWire from="left" />
       </main>
       <SiteFooter locale={locale} />
     </>

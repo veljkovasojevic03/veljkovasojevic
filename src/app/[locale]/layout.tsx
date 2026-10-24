@@ -43,7 +43,8 @@ export default async function LocaleLayout({ children, modal }: LayoutProps<"/[l
       <head>
         <script dangerouslySetInnerHTML={{ __html: introBootScript }} />
       </head>
-      <body>
+      {/* suppressHydrationWarning: dodaci za browser (npr. ColorZilla) dopisuju atribute na <body>. */}
+      <body suppressHydrationWarning>
         <NextIntlClientProvider>
           <a
             href={`#${sectionIds.main}`}

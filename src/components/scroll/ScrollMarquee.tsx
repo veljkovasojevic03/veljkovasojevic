@@ -1,16 +1,12 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { gsap, ScrollTrigger } from "@/lib/gsap";
+import { gsap } from "@/lib/gsap";
 import { useReducedMotion } from "@/lib/useMediaQuery";
+import { useScrollBoost } from "@/lib/useScrollBoost";
 
 /** Osnovna brzina u px/s; skrol je privremeno umnožava. */
 const BASE_SPEED = 48;
-/** Najveće ubrzanje od skrola i koliko brzo se gasi (po frejmu od 60 Hz). */
-const MAX_BOOST = 6;
-const BOOST_DECAY = 0.92;
-/** Brzina skrola (px/s) koja daje jedno dodatno ubrzanje. */
-const VELOCITY_PER_BOOST = 300;
 /** Koliko puta se niz ponavlja u jednoj polovini (da pokrije širok ekran). */
 const COPIES = 3;
 
@@ -29,48 +25,28 @@ export function ScrollMarquee({ items, separator, className }: Props) {
   const reduce = useReducedMotion();
   const rootRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
+  const x = useRef(0);
+  // Širina trake se kešira; čitanje u svakom frejmu bi teralo browser na raspored.
+  const width = useRef(0);
+
+  // Traka ima dve iste polovine; pomeraj se omotava na [-50%, 0), pa nema šava.
+  useScrollBoost(rootRef, !reduce, (deltaMs, direction, speed) => {
+    const track = trackRef.current;
+    if (!track || !width.current) return;
+    const percentPerSec = ((BASE_SPEED * speed) / width.current) * 100;
+    x.current = gsap.utils.wrap(-50, 0, x.current - (direction * percentPerSec * deltaMs) / 1000);
+    gsap.set(track, { xPercent: x.current });
+  });
 
   useEffect(() => {
-    const root = rootRef.current;
     const track = trackRef.current;
-    if (reduce || !root || !track) return;
-
-    // Traka ima dve iste polovine; pomeraj se omotava na [-50%, 0), pa nema šava.
-    const setX = gsap.quickSetter(track, "xPercent");
-    const wrap = gsap.utils.wrap(-50, 0);
-    let x = 0;
-    let direction = 1;
-    let boost = 0;
-    let width = track.scrollWidth;
-
-    const tick = (_time: number, deltaMs: number) => {
-      const frames = deltaMs / (1000 / 60);
-      boost *= Math.pow(BOOST_DECAY, frames);
-      const pxPerSec = BASE_SPEED * (1 + boost);
-      x = wrap(x - (direction * pxPerSec * deltaMs) / 1000 / width * 100);
-      setX(x);
-    };
-
-    const trigger = ScrollTrigger.create({
-      trigger: root,
-      start: "top bottom",
-      end: "bottom top",
-      onUpdate: (self) => {
-        direction = self.direction;
-        boost = Math.min(Math.abs(self.getVelocity()) / VELOCITY_PER_BOOST, MAX_BOOST);
-      },
-      onToggle: (self) => {
-        if (self.isActive) gsap.ticker.add(tick);
-        else gsap.ticker.remove(tick);
-      },
-      onRefresh: () => {
-        width = track.scrollWidth;
-      },
+    if (reduce || !track) return;
+    const observer = new ResizeObserver(() => {
+      width.current = track.scrollWidth;
     });
-
+    observer.observe(track);
     return () => {
-      gsap.ticker.remove(tick);
-      trigger.kill();
+      observer.disconnect();
       gsap.set(track, { clearProps: "transform" });
     };
   }, [reduce]);

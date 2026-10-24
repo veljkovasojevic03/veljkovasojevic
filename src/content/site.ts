@@ -269,6 +269,10 @@ export const ui = {
     photo: { sr: "fotografija · 4:5", en: "photo · 4:5" },
   },
   externalLink: { sr: "(otvara se u novom prozoru)", en: "(opens in a new tab)" },
+  /** Dugme preko kartice u „O meni“ (aria-label; aria-pressed kaže stanje). */
+  flipCard: { sr: "Okreni karticu", en: "Flip the card" },
+  /** Alt tekst fotografije u „O meni“. */
+  photoAlt: { sr: "Veljko Vasojević", en: "Veljko Vasojević" },
   /** Alt tekst snimaka demo sajtova: "<prefix> <ime sajta>, <uređaj>". */
   siteShot: {
     prefix: { sr: "Početna strana:", en: "Homepage:" },

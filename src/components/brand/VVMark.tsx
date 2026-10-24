@@ -9,9 +9,11 @@ type Props = {
   className?: string;
   /** Za GSAP Flip u uvodu (cilj na koji znak sleće). */
   "data-vv-target"?: boolean;
+  /** Boja reza oko drugog V = boja podloge na kojoj znak stoji. */
+  cut?: string;
 };
 
-export function VVMark({ className, ...rest }: Props) {
+export function VVMark({ className, cut = "var(--bg)", ...rest }: Props) {
   return (
     <svg
       className={className}
@@ -21,7 +23,7 @@ export function VVMark({ className, ...rest }: Props) {
       {...rest}
     >
       <path d={V1} fill="var(--text)" />
-      <path d={V2} fill="none" stroke="var(--bg)" strokeWidth={VV_GAP} strokeLinejoin="miter" />
+      <path d={V2} fill="none" stroke={cut} strokeWidth={VV_GAP} strokeLinejoin="miter" />
       <path d={V2} fill="var(--energy)" />
     </svg>
   );

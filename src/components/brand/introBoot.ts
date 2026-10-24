@@ -6,6 +6,6 @@ export const INTRO_ATTR = "data-intro";
 /**
  * Skripta u <head>: odlučuje o uvodu pre nego što se stranica nacrta,
  * da ne bude bljeska sadržaja ni bljeska uvoda kod povratnika.
- * Uz smanjen pokret uvoda nema.
+ * Uz smanjen pokret uvoda nema. `?intro` u adresi ga prikazuje ponovo (za proveru).
  */
-export const introBootScript = `try{if(!matchMedia("(prefers-reduced-motion: reduce)").matches&&!sessionStorage.getItem("${INTRO_KEY}"))document.documentElement.setAttribute("${INTRO_ATTR}","")}catch(e){}`;
+export const introBootScript = `try{if(!matchMedia("(prefers-reduced-motion: reduce)").matches&&(!sessionStorage.getItem("${INTRO_KEY}")||new URLSearchParams(location.search).has("intro")))document.documentElement.setAttribute("${INTRO_ATTR}","")}catch(e){}`;

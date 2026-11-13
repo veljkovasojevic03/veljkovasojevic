@@ -53,7 +53,7 @@
 - **Samostalno:** HTML, CSS, JavaScript · GSAP · Webflow · Git i GitHub · SQL / MySQL · Laravel / PHP · Java · Kotlin i Android · ESP32 / Arduino
 - **Uz AI asistenta:** React · Next.js · TypeScript · Node.js · Supabase · Stripe · n8n
 
-(Ovde ide i opcioni 3D sto, ako se radi.)
+(3D sto izbačen 13. 11. 2026.)
 
 ---
 
@@ -61,6 +61,7 @@
 
 **Naslov:** Treba ti sajt?  (ceo sajt koristi „ti“)
 **Tekst:** Napravio sam nekoliko sajtova na svoju inicijativu, kao demo, da pokažem kako bi mogli da izgledaju. Nisu naručeni, ali su urađeni kao da jesu.
+- Vrtlog Rafting, Tara · koncept · fiktivni brend · vrtlog.tara-rafting.workers.dev (13. 11. 2026, prva, široka kartica)
 - Đak Food Store, Čačak · samoinicijativni demo · djak.vercel.app
 - Portfolio, Borivoje Vasojević · lični portfolio · borivojevasojevic.vercel.app (23. 10. 2026: umesto Pribojske Banje, koja je lokalni sajt)
 - Webflow radovi · 5 starijih sajtova u Webflow-u · veljkovasojevic.webflow.io

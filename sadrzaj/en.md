@@ -137,6 +137,7 @@ The whole system, on my own: the idea, choosing the platform and components, the
 
 **Title:** Need a website?
 **Text:** I built a few websites on my own initiative, as demos, to show what they could look like. Nobody ordered them, but they were made as if someone had.
+- Vrtlog Rafting, Tara · concept · fictional brand · Open site ↗
 - Đak Food Store, Čačak · self-initiated demo · Open site ↗
 - Portfolio, Borivoje Vasojević · personal portfolio · Open site ↗
 - Webflow work · 5 earlier sites built in Webflow · Open ↗

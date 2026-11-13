@@ -18,6 +18,8 @@ type Shot = {
 };
 
 const sites: Shot[] = [
+  // Vrtlog: 3D kanjon (WebGL) se iscrtava posle učitavanja.
+  { slug: "vrtlog", url: "https://vrtlog.tara-rafting.workers.dev", settleMs: 8000 },
   // Đak ima uvodni ekran sa procentima pre početne strane.
   { slug: "djak", url: "https://djak.vercel.app", settleMs: 9000 },
   { slug: "borivoje", url: "https://borivojevasojevic.vercel.app", settleMs: 3000 },
@@ -71,7 +73,11 @@ async function toWebp(browser: Browser, png: Buffer): Promise<Buffer> {
 
 async function main() {
   await mkdir(OUT_DIR, { recursive: true });
-  const browser = await chromium.launch();
+  // Prava grafička kartica umesto softverskog WebGL-a: inače 3D sajtovi (Vrtlog)
+  // izmere nizak FPS i pređu na statičnu verziju.
+  const browser = await chromium.launch({
+    args: ["--use-angle=d3d11", "--enable-gpu", "--ignore-gpu-blocklist"],
+  });
   try {
     const only = process.argv[2];
     for (const site of sites.filter((s) => !only || s.slug === only)) {

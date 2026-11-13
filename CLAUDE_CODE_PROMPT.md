@@ -122,7 +122,7 @@ Ako neki skill nije dostupan u sesiji, reci to u izveštaju i nastavi bez njega;
 1. **Kartica koja se okreće:** napred fotografija 4:5 (`public/media/veljko.*`; do tada placeholder istog formata) + rotirajući prsten (Circular Text, prilagođen; „DOSTUPAN ZA SARADNJU •“ / „OPEN TO WORK •“, brzina prati skrol); pozadi „lična karta“ iz `sadrzaj/`. Okretanje klikom, tapom i tastaturom (`button` sa `aria-pressed`, sadržaj obe strane dostupan čitaču ekrana); tokom okretanja struja protrči po ivici. Reduced motion: pretapanje.
 2. Tekst „O meni“ (tri pasusa, istaknute tri vrste posla).
 3. „Kako radim“: naslov + tri koraka; veštine u dve kolone („Samostalno“ / „Uz AI asistenta“).
-4. Ostavi prazno, označeno mesto za opcioni 3D sto (bez koda).
+4. (Mesto za 3D sto izbačeno 13. 11. 2026.)
 
 **Izveštaj + STOP.**
 
@@ -152,9 +152,7 @@ Ako neki skill nije dostupan u sesiji, reci to u izveštaju i nastavi bez njega;
 
 **Izveštaj + STOP.**
 
-## FAZA 11 (opciono, samo na Veljkov zahtev): 3D sto
-
-Ne počinji bez izričitog zahteva. Ako dođe: React Three Fiber, model od jednostavnih oblika ili CC0 sa proverenom licencom, učitavanje tek kad se približi ekranu, na telefonu i uz reduced motion unapred renderovan video/slika umesto WebGL-a, najviše jedan WebGL canvas na ekranu.
+## (Faza 11, 3D sto: izbačena 13. 11. 2026; 3D pokazuje Vrtlog u „Sajtovima za firme“.)
 
 ---
 

@@ -39,8 +39,8 @@ Kvalitet je važniji od brzine; nema roka.
 | 3 | **Showreel** | Mali okvir sa showreel videom (~15 s, isečci svih projekata) pri skrolu se širi preko celog ekrana („ulazimo u sliku“), pa prelazi u radove. Zakačena scena (ScrollTrigger pin), na telefonu kraća. |
 | 4 | **Radovi 01–05** | Numerisana lista (vidi 6.1). Redosled: Autoservis Tole · Fanout AI · Relay AI · CineSpire · SeniorGuard. |
 | 5 | **Trak** | Jedan trak pri skrolu: WEB SAJTOVI ✦ WEB APLIKACIJE ✦ AI ALATI ✦ (brzina prati skrol; tekst privremen, može se menjati). |
-| 6 | **Sajtovi za firme** | Dve velike kartice (Đak Food Store sa oznakom „samoinicijativni demo“; Portfolio, Borivoje Vasojević sa oznakom „lični portfolio“) sa snimkom ekrana i „Otvori sajt ↗“; manja kartica „Webflow radovi“. Bez popupa. |
-| 7 | **O meni + Kako radim** | Kartica sa fotografijom koja se okreće + kratka priča; tri koraka „Kako radim“; veštine u dve kolone. (Mesto za opcioni 3D sto.) |
+| 6 | **Sajtovi za firme** | Prva, široka kartica: Vrtlog Rafting, Tara (3D kanjon, oznaka „koncept · fiktivni brend“, 13. 11. 2026). Ispod dve velike kartice (Đak Food Store sa oznakom „samoinicijativni demo“; Portfolio, Borivoje Vasojević sa oznakom „lični portfolio“) sa snimkom ekrana i „Otvori sajt ↗“; manja kartica „Webflow radovi“. Bez popupa. |
+| 7 | **O meni + Kako radim** | Kartica sa fotografijom koja se okreće + kratka priča; tri koraka „Kako radim“; veštine u dve kolone. |
 | 8 | **Kontakt / podnožje** | Poziv, kopiranje mejla, kolone linkova, ogromno ime VASOJEVIĆ sa munjama, donji red. |
 
 **Nema:** odeljka „Još radova“, testimonijala, CV-a (za sada), forme, chatbota, komandne palete, svetle teme.
@@ -154,4 +154,4 @@ Emil Kowalski (pokret), Impeccable (selektivno, bez hookova; „struja“ je nam
 
 ## 12. Van okvira
 
-Odeljak „Još radova“, testimonijali, CV (za sada), kontakt forma, Relay chatbot na sajtu, komandna paleta, svetla tema, YouTube i dugi video, pominjanje lokacije rada, Orfej sajt. **3D sto:** opciona faza posle objave.
+Odeljak „Još radova“, testimonijali, CV (za sada), kontakt forma, Relay chatbot na sajtu, komandna paleta, svetla tema, YouTube i dugi video, pominjanje lokacije rada, Orfej sajt. **3D sto:** izbačen 13. 11. 2026 (3D pokazuje Vrtlog).

@@ -33,17 +33,27 @@ export function Sites({ locale }: { locale: Locale }) {
             return (
               <li
                 key={site.slug}
-                className="group flex flex-col overflow-hidden rounded-xl border border-line-2 bg-bg-2"
+                className={`group flex flex-col overflow-hidden rounded-xl border border-line-2 bg-bg-2 ${
+                  // Istaknuta kartica je šira samo na računaru; na telefonu ostaje 16:10.
+                  site.featured ? "[--frame-aspect:16/10] lg:col-span-2 lg:[--frame-aspect:2/1]" : ""
+                }`}
               >
                 {/* Snimak računara u prozoru; telefon izranja iz donjeg desnog ugla. */}
                 <div className="relative overflow-hidden p-4 pb-0 sm:p-6 sm:pb-0">
-                  <BrowserFrame aspect="16 / 10" className="rounded-b-none border-b-0">
+                  <BrowserFrame
+                    aspect={site.featured ? "var(--frame-aspect)" : "16 / 10"}
+                    className="rounded-b-none border-b-0"
+                  >
                     {desktop ? (
                       <Image
                         src={desktop}
                         alt={`${shot.prefix[locale]} ${title}, ${shot.desktop[locale]}`}
                         fill
-                        sizes="(min-width: 1200px) 540px, (min-width: 1024px) 45vw, 100vw"
+                        sizes={
+                          site.featured
+                            ? "(min-width: 1200px) 1100px, 100vw"
+                            : "(min-width: 1200px) 540px, (min-width: 1024px) 45vw, 100vw"
+                        }
                         className="object-cover object-top"
                       />
                     ) : (
